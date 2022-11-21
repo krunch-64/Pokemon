@@ -1,7 +1,14 @@
 <?php
 
+require('./Joueur.php');
+
 class Pokemon 
 {
+    /**
+     * import les fonctions des Joueurs
+     */
+    use Joueur;
+
     /**
      * Nom du Pokémon
      * @var string
@@ -21,7 +28,7 @@ class Pokemon
     protected $hp;
 
     /**
-     * Crontruct de la classe Pokémon
+     * Contruct de la classe Pokémon
      * @param string $name
      * @param string $element
      * @param int $hp
@@ -35,7 +42,6 @@ class Pokemon
 
 
     // GETTER
-
     /**
      * @return string
      */
@@ -91,6 +97,5 @@ class Pokemon
         $this->hp = $hp;
         return $this;
     }
-
 }
 ?>
