@@ -1,8 +1,9 @@
 <?php
 
 require('./Joueur.php');
+require('./Attack.php');
 
-class Pokemon 
+class Pokemon extends Attack
 {
     /**
      * import les fonctions des Joueurs
@@ -33,8 +34,9 @@ class Pokemon
      * @param string $element
      * @param int $hp
      */
-    public function __construct(string $name, string $element, int $hp)
+    public function __construct(string $name, string $element, int $hp, int $damage, string $type, float $damageTaux, string $secondaryEffect)
     {
+        parent::__construct($damage, $type, $damageTaux, $secondaryEffect);
         $this->name = $name;
         $this->element = $element;
         $this->hp = $hp;
