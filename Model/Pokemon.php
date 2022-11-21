@@ -29,17 +29,24 @@ class Pokemon extends Attack
     protected $hp;
 
     /**
+     * Vitesse du Pokémon
+     * @var int
+     */
+    protected $speed;
+
+    /**
      * Contruct de la classe Pokémon
      * @param string $name
      * @param string $element
      * @param int $hp
      */
-    public function __construct(string $name, string $element, int $hp, int $damage, string $type, float $damageTaux, string $secondaryEffect)
+    public function __construct(string $name, string $element, int $hp, int $speed, int $damage, string $type, float $damageTaux, string $secondaryEffect)
     {
         parent::__construct($damage, $type, $damageTaux, $secondaryEffect);
         $this->name = $name;
         $this->element = $element;
         $this->hp = $hp;
+        $this->speed = $speed;
     }
 
 
@@ -67,6 +74,14 @@ class Pokemon extends Attack
     {
         return $this->hp;
     }
+
+	/**
+	 * Vitesse du Pokémon
+	 * @return int
+	 */
+	public function getSpeed() {
+		return $this->speed;
+	}
 
 
     // SETTER
@@ -99,5 +114,15 @@ class Pokemon extends Attack
         $this->hp = $hp;
         return $this;
     }
+	
+	/**
+	 * Vitesse du Pokémon
+	 * @param int $speed Vitesse du Pokémon
+	 * @return self
+	 */
+	public function setSpeed($speed): self {
+		$this->speed = $speed;
+		return $this;
+	}
 }
 ?>
