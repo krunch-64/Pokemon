@@ -1,5 +1,5 @@
 <?php 
-include '../vendor/autoload.php';
+include 'vendor/autoload.php';
 
 function request(string $url)
 {
@@ -9,20 +9,7 @@ function request(string $url)
 }
 
 
-function get_pokemon_list() {
-    $result = request('https://pokeapi.co/api/v2/pokemon?offset=0&limit=24');
 
-    $pokemons =  $result->{'results'};
-    foreach($pokemons as $pokemon) {
-
-        $id = request('https://pokeapi.co/api/v2/pokemon/'.$pokemon->{'name'})->{'id'};
-        $name = $pokemon->{'name'};
-        ?> <div class="card ">
-            <img alt='<?= $name ?>' src="<?= get_Sprites($id,'front') ?>">
-            <p alt='<?= $id ?>'><?= translate_name_pokemon($name) ?></p>
-        </div> <?php 
-    }
-};
 
 /** La fonction get_front_sprites permet de récupré la front sprites d'un pokemon
  * @param string $id d'un pokemon
@@ -67,7 +54,6 @@ function get_pokemon_stat(string $id)
     return $table;
 }
 
-var_dump(get_pokemon_stat(1));
 /** la fonction translate_name_pokemon permet de traduire le nom de pokemon en anglais en français
  * @param string $response page pokemon
  * @return string $name pokemon in french

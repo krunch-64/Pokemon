@@ -1,4 +1,6 @@
 <?php
+
+
     // Rôle : afficher la liste des pokémon
     
     // connexion du serveur web à la base MySQL

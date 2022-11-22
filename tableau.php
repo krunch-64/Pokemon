@@ -22,7 +22,7 @@
                   </table>
             </div>
             <div class="buttons">
-                <a href="/accueil.html"><button class="first">Retour</button></a>
+                <a href="/index.php?Tableaux"><button class="first">Retour</button></a>
             </div>
         </div>
     </div>
