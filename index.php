@@ -9,14 +9,14 @@ function request(string $url)
 }
 
 function get_pokemon_list() {
-    $result = request('https://pokeapi.co/api/v2/pokemon?offset=40&limit=30');
+    $result = request('https://pokeapi.co/api/v2/pokemon?offset=30&limit=30');
 
     $pokemons =  $result->{'results'};
     foreach($pokemons as $pokemon) {
-        //var_dump($pokemon) ;
-        $url = $pokemon->{'url'};
+
+        $id = request('https://pokeapi.co/api/v2/pokemon/'.$pokemon->{'name'})->{'id'};
         $name = $pokemon->{'name'};
-        ?> <img alt='<?= $name ?>' src="<?= get_front_Sprites($url) ?>">
+        ?> <img alt='<?= $name ?>' src="<?= get_Sprites($id,'front') ?>">
         <p><?= translate_name_pokemon($name) ?></p><?php 
         
     }
@@ -25,50 +25,48 @@ function get_pokemon_list() {
 get_pokemon_list();
 
 /** La fonction get_front_sprites permet de récupré la front sprites d'un pokemon
- * @param string $url lien page d'un pokemon 
+ * @param string $id d'un pokemon
+ * @param string $frame 'front' ou 'back' 
  * @return string $url
  */
-function get_front_Sprites (string $url) 
+function get_Sprites (string $id,$frame) 
 {
-    $client = new \GuzzleHttp\Client();
-    $response = $client->request('GET', $url);
-    $response = $response->getBody();
-    $parsed_json = json_decode($response);
-    return $parsed_json->{'sprites'}->{'front_default'};
+    $request = request('https://pokeapi.co/api/v2/pokemon/'.$id);
+    if ($frame == 'front') {return $request->{'sprites'}->{'front_default'};}
+    else if ($frame == 'back') {return $request->{'sprites'}->{'back_default'};}
+    
 }
 
-/** la fonction get_pokemon_stat permet de récupré les stats néssésaire pour crée une class pokemon
- * @param string $url
- */
-function get_pokemon_stat(string $name)
-{
-    $client = new \GuzzleHttp\Client();
-    $response = $client->request('GET','https://pokeapi.co/api/v2/pokemon/'.$name);
-    $response = $response->getBody();
-    $parsed_json = json_decode($response);
 
-    $name = translate_name_pokemon($name);
+/** la fonction get_pokemon_stat permet de récupré les stats néssésaire pour crée une class pokemon
+ * @param string $id
+ */
+function get_pokemon_stat(string $id)
+{
+    $parsed_json = request('https://pokeapi.co/api/v2/pokemon/'.$id);
+
+
+    $id ;
+    $name = $parsed_json->{'name'};
     $element_primary = $parsed_json->{'types'}[0]->{'type'}->{'name'};
-    if (isset($parsed_json->{'types'}[1]->{'type'}->{'name'})) { $element_secondary = $parsed_json->{'types'}[1]->{'type'}->{'name'};}
+    if (isset($parsed_json->{'types'}[1]->{'type'}->{'name'})) {$element_secondary = $parsed_json->{'types'}[1]->{'type'}->{'name'};}
     $pv = $parsed_json->{'stats'}[0]->{'base_stat'};
     $attack = $parsed_json->{'stats'}[1]->{'base_stat'};
     $defense = $parsed_json->{'stats'}[2]->{'base_stat'};
     $special_attack = $parsed_json->{'stats'}[3]->{'base_stat'};
     $special_defense = $parsed_json->{'stats'}[4]->{'base_stat'};
     $speed = $parsed_json->{'stats'}[5]->{'base_stat'};
+    
 }
 
-
 /** la fonction translate_name_pokemon permet de traduire le nom de pokemon en anglais en français
- * @param string $name pokemon in english
- * @return string $name in french
+ * @param string $response page pokemon
+ * @return string $name pokemon in french
  */
 function translate_name_pokemon (string $name) 
 {
-    $client = new \GuzzleHttp\Client();
-    $response = $client->request('GET','https://pokeapi.co/api/v2/pokemon/'.$name);
-    $parsed_json = json_decode($response->getBody());
-    $response = $client->request('GET',$parsed_json->{'species'}->{'url'});
-    $parsed_json = json_decode($response->getBody());
-    return $parsed_json->{'names'}[4]->{'name'};
+    return  request(request('https://pokeapi.co/api/v2/pokemon/'.$name)->{'species'}->{'url'})->{'names'}[4]->{'name'};
 }
+
+
+
