@@ -9,12 +9,8 @@ function request(string $url)
 }
 
 function get_pokemon_list() {
-    $result = request('https://pokeapi.co/api/v2/');
+    $result = request('https://pokeapi.co/api/v2/pokemon?offset=40&limit=30');
 
-    var_dump($result->{'next'});
-    echo '<hr>';
-    var_dump($result->{'previous'});
-    echo '<hr>';
     $pokemons =  $result->{'results'};
     foreach($pokemons as $pokemon) {
         //var_dump($pokemon) ;
@@ -24,12 +20,7 @@ function get_pokemon_list() {
         <p><?= translate_name_pokemon($name) ?></p><?php 
         
     }
-    ?><button href="<?= request($result->{'previous'}) ?>">précedent</button> 
-    <button href="<?= request($result->{'next'}) ?>">suivant</button> <?php
-    echo '<hr>';
 };
-
-
 
 get_pokemon_list();
 
@@ -57,7 +48,8 @@ function get_pokemon_stat(string $name)
     $parsed_json = json_decode($response);
 
     $name = translate_name_pokemon($name);
-    $element = [$parsed_json->{'types'}[0]->{'type'}->{'name'},$parsed_json->{'types'}[1]->{'type'}->{'name'}];
+    $element_primary = $parsed_json->{'types'}[0]->{'type'}->{'name'};
+    if (isset($parsed_json->{'types'}[1]->{'type'}->{'name'})) { $element_secondary = $parsed_json->{'types'}[1]->{'type'}->{'name'};}
     $pv = $parsed_json->{'stats'}[0]->{'base_stat'};
     $attack = $parsed_json->{'stats'}[1]->{'base_stat'};
     $defense = $parsed_json->{'stats'}[2]->{'base_stat'};
