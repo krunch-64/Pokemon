@@ -1,6 +1,6 @@
 <?php
 
-trait Joueur
+class Joueur
 {
     /**
      * Identifiant du joueur
@@ -12,7 +12,7 @@ trait Joueur
      * Nom du jouer 
      * @var string
      */
-    protected $nameJoueur = "bruno";
+    protected $nameJoueur;
 
     /**
      * score du joueur

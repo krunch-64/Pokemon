@@ -1,5 +1,5 @@
 <?php
-    // include './controleurs/function.php';
+    include './controleurs/function.php';
     
     include_once ('./modeles/DAO.php');
 

@@ -20,12 +20,14 @@
             <h4>Choisissez 3 pokémons :</h4>
             <div class="liste">
                 <?php
-                    for ($i=0; $i < count($tablePokemon); $i++)
-                    {
-                        echo $tablePokemon[$i]->getName() . "<br/>";
-                        echo $tablePokemon[$i]->getid() ."<br>";
-                        echo get_Sprites($tablePokemon[$i]->getid(), 'front');
-                    }
+
+                    get_pokemon_list();
+                    // for ($i=0; $i < count($tablePokemon); $i++)
+                    // {
+                    //     echo $tablePokemon[$i]->getName() . "<br/>";
+                    //     echo $tablePokemon[$i]->getid() ."<br>";
+                    //     echo get_Sprites($tablePokemon[$i]->getId(), 'front');
+                    // }
                 ?>
             </div>        
         </div>
