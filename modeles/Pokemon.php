@@ -70,8 +70,9 @@ class Pokemon
      * @param string $element2
      * @param int $hp
      */
-    public function __construct(string $name, string $element, string $element2, int $hp, int $damage, int $defense, array $double_damage_from, array $double_damage_to)
+    public function __construct(int $id, string $name, string $element, string $element2, int $hp, int $damage, int $defense, array $double_damage_from, array $double_damage_to)
     {
+		$this->id = $id;
         $this->name = $name;
         $this->element = $element;
         $this->element2 = $element2;
@@ -136,6 +137,24 @@ class Pokemon
     }
 
 	// GETTER ET SETTER
+	/**
+	 * Identifiant du Pokémon
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
+	
+	/**
+	 * Identifiant du Pokémon
+	 * @param int $id Identifiant du Pokémon
+	 * @return self
+	 */
+	public function setId($id): self {
+		$this->id = $id;
+		return $this;
+	}
+	
 	/**
 	 * Nom du Pokémon
 	 * @return string
@@ -261,7 +280,6 @@ class Pokemon
 		$this->damagesSuffered = $damagesSuffered;
 		return $this;
 	}
-
 
 	/**
 	 * faiblesse

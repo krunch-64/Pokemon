@@ -19,8 +19,14 @@
             <a href="./index.php?Accueil"><img src="/assets/img/logo.png" alt=""></a>
             <h4>Choisissez 3 pokémons :</h4>
             <div class="liste">
-               <?= get_pokemon_list(); ?>
-                </div>
+                <?php
+                    for ($i=0; $i < count($tablePokemon); $i++)
+                    {
+                        echo $tablePokemon[$i]->getName() . "<br/>";
+                        echo $tablePokemon[$i]->getid() ."<br>";
+                        echo get_Sprites($tablePokemon[$i]->getid(), 'front');
+                    }
+                ?>
             </div>        
         </div>
     </div>

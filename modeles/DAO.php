@@ -96,7 +96,7 @@ class DAO
         $i = 0;
         
         // préparation de la requête de recherche
-        $txt_req = "Select pokemon_name, pokemon_element, pokemon_element2, pokemon_hp, pokemon_attack, pokemon_defense, pokemon_damage_from, pokemon_damage_to";
+        $txt_req = "Select pokemon_id, pokemon_name, pokemon_element, pokemon_element2, pokemon_hp, pokemon_attack, pokemon_defense, pokemon_damage_from, pokemon_damage_to";
         $txt_req .= " from pokemon";
 
         // faire juste quand le pokemon est utiliser /* where personne_id =id */
@@ -115,6 +115,7 @@ class DAO
         {
         
             // création d'un objet Pokemon
+            $pokemon_id = $uneLigne->pokemon_id;
             $pokemon_name = $uneLigne->pokemon_name;
             $pokemon_element = $uneLigne->pokemon_element;
             $pokemon_element2 = $uneLigne->pokemon_element2;
@@ -124,7 +125,7 @@ class DAO
             $pokemon_damage_from = $uneLigne->pokemon_damage_from;
             $pokemon_damage_to = $uneLigne->pokemon_damage_to;
              
-            $unePokemon = new Pokemon($pokemon_name, $pokemon_element, $pokemon_element2, $pokemon_hp, $pokemon_damage, $pokemon_defense, json_decode($pokemon_damage_from), json_decode($pokemon_damage_to));
+            $unePokemon = new Pokemon($pokemon_id, $pokemon_name, $pokemon_element, $pokemon_element2, $pokemon_hp, $pokemon_damage, $pokemon_defense, json_decode($pokemon_damage_from), json_decode($pokemon_damage_to));
             $lesPokemons[$i] = $unePokemon;
             $i++;
         }
