@@ -1,0 +1,20 @@
+{
+  "name": "la-manu-box",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch ./assets/scss/input.scss:./assets/css/output.css",
+    "sasscomp": "sass --watch ./assets/scss/input.scss:./assets/css/output.css --style=compressed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexandreBIEN/la-manu-box.git"
+  },
+  "author": "Alexandre",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexandreBIEN/la-manu-box/issues"
+  },
+  "homepage": "https://github.com/AlexandreBIEN/la-manu-box#readme"
+}
