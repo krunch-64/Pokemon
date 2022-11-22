@@ -2,6 +2,12 @@
 
 class Pokemon
 {
+	/**
+	 * Identifiant du Pokémon
+	 * @var int
+	 */
+	protected $id;
+
     /**
      * Nom du Pokémon
      * @var string
@@ -38,14 +44,27 @@ class Pokemon
      */
     protected $defense;
 
+	/**
+     * dégât subit par le personnage
+     * @var int
+     */
+    protected $damagesSuffered;
+
+	/**
+	 * faiblesse
+	 * @var array
+	 */
+	protected $weakness;
+
     /**
      * Contruct de la classe Pokémon
+	 * @param int $id
      * @param string $name
      * @param string $element
      * @param string $element2
      * @param int $hp
      */
-    public function __construct(string $name, string $element, string $element2, int $hp, int $damage, int $defense)
+    public function __construct(string $name, string $element, string $element2, int $hp, int $damage, int $defense, array $weakness)
     {
         $this->name = $name;
         $this->element = $element;
@@ -53,6 +72,50 @@ class Pokemon
         $this->hp = $hp;
         $this->damage = $damage;
         $this->defense = $defense;
+		$this->weakness = $weakness;
+    }
+
+	 /**
+     * degat subit par le pokemon
+     * @param int $degat
+     * @return self
+     */
+    public function attacked($degat): self
+    {   
+        if($this->getDefense() > 0)
+        {
+            $this->setDefense($this->getDefense() - 10);
+            $this->setDamagesSuffered($degat - $this->getDefense());
+        }
+        else
+        {
+            $this->setDamagesSuffered($degat);
+        }
+
+        if($this->getDamagesSuffered() < 0)
+        {
+            $this->setDamagesSuffered(0);
+        }
+
+        $this->setHp($this->getHp()-$this->getDamagesSuffered());
+
+        if($this->getHp() < 0)
+        {
+            $this->setHp(0);
+        }
+
+        return $this;
+    }
+
+	/**
+     * degat fait par le pokemon
+     * @return int
+     */
+    public function attack(): int
+    {
+		// if 
+
+        return $this->getDamage();
     }
 
 	// GETTER ET SETTER
@@ -161,6 +224,24 @@ class Pokemon
 	 */
 	public function setDefense($defense): self {
 		$this->defense = $defense;
+		return $this;
+	}
+
+	/**
+	 * dégât subit par le personnage
+	 * @return int
+	 */
+	public function getDamagesSuffered() {
+		return $this->damagesSuffered;
+	}
+	
+	/**
+	 * dégât subit par le personnage
+	 * @param int $damagesSuffered dégât subit par le personnage
+	 * @return self
+	 */
+	public function setDamagesSuffered($damagesSuffered): self {
+		$this->damagesSuffered = $damagesSuffered;
 		return $this;
 	}
 }

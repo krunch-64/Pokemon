@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="fight_window__player_space1__infos__stats">
-                    <p class="txt-l name-pokemon">Pikachuddddddddddddddddddd</p>
+                    <p class="txt-l name-pokemon">RAYQUAZA</p>
                 </div>
             </div>
         </div>
