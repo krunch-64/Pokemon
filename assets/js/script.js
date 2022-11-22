@@ -16,10 +16,10 @@ var menuArena2 = document.getElementById('menu-arena-2');
 var menuArena3 = document.getElementById('menu-arena-3');
 var menuArena4 = document.getElementById('menu-arena-4');
 
-var pkmn1 = document.getElementById('menu-arena-1');
-var pkmn2 = document.getElementById('menu-arena-2');
+var pkmn1 = document.getElementById('pokemon1');
+var pkmn2 = document.getElementById('pokemon2');
 
-
+var controltest = 0;
 
 
 
@@ -60,10 +60,13 @@ btnBack3.addEventListener("click", function () {
 }); 
 
 btnAttack1.addEventListener("click", function () {
+    
+    
     menuArena1.classList.add('d-none');
     menuArena2.classList.add('d-none');
     menuArena3.classList.add('d-none');
     menuArena4.classList.add('d-none');
+
 
     var xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
@@ -71,6 +74,14 @@ btnAttack1.addEventListener("click", function () {
     };
     xhttp.open("GET", "send_request_ajax.php?action=attack1", true);
     xhttp.send();
+
+    
+    pkmn1.classList.add('pokemon1-attack');
+    pkmn2.classList.add('pokemon2-attack');
+    
+    controltest = 1;
+    
+    
 }); 
 
 
@@ -103,3 +114,29 @@ btnPkmn2.addEventListener("click", function () {
     xhttp.open("GET", "send_request_ajax.php?action=pkmn2", true);
     xhttp.send();
 }); 
+
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+
+
+setInterval(function () {
+    if (controltest == 1)
+    {
+
+
+
+        pkmn1.classList.remove('pokemon1-attack');
+        pkmn2.classList.remove('pokemon2-attack');
+        menuArena1.classList.remove('d-none');
+        controltest = 0
+
+        
+
+
+    }
+
+}, 5000);
+
