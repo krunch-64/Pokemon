@@ -54,7 +54,13 @@ class Pokemon
 	 * faiblesse
 	 * @var array
 	 */
-	protected $weakness;
+	protected $double_damage_from;
+
+	/**
+	 * faiblesse
+	 * @var array
+	 */
+	protected $double_damage_to;
 
     /**
      * Contruct de la classe Pokémon
@@ -64,7 +70,7 @@ class Pokemon
      * @param string $element2
      * @param int $hp
      */
-    public function __construct(string $name, string $element, string $element2, int $hp, int $damage, int $defense, array $weakness)
+    public function __construct(string $name, string $element, string $element2, int $hp, int $damage, int $defense, array $double_damage_from, array $double_damage_to)
     {
         $this->name = $name;
         $this->element = $element;
@@ -72,7 +78,8 @@ class Pokemon
         $this->hp = $hp;
         $this->damage = $damage;
         $this->defense = $defense;
-		$this->weakness = $weakness;
+		$this->double_damage_from = $double_damage_from;
+		$this->double_damage_to = $double_damage_to;
     }
 
 	 /**
@@ -82,6 +89,8 @@ class Pokemon
      */
     public function attacked($degat): self
     {   
+		// si le damage_from correspond au type d'attaque de l'ennemie alors double degat
+
         if($this->getDefense() > 0)
         {
             $this->setDefense($this->getDefense() - 10);
@@ -113,7 +122,7 @@ class Pokemon
      */
     public function attack(): int
     {
-		// if 
+		// si le damage_to correspond au type d'element de l'ennemie alors double degat
 
         return $this->getDamage();
     }
@@ -242,6 +251,43 @@ class Pokemon
 	 */
 	public function setDamagesSuffered($damagesSuffered): self {
 		$this->damagesSuffered = $damagesSuffered;
+		return $this;
+	}
+
+
+	/**
+	 * faiblesse
+	 * @return array
+	 */
+	public function getDouble_damage_from() {
+		return $this->double_damage_from;
+	}
+	
+	/**
+	 * faiblesse
+	 * @param array $double_damage_from faiblesse
+	 * @return self
+	 */
+	public function setDouble_damage_from($double_damage_from): self {
+		$this->double_damage_from = $double_damage_from;
+		return $this;
+	}
+
+	/**
+	 * faiblesse
+	 * @return array
+	 */
+	public function getDouble_damage_to() {
+		return $this->double_damage_to;
+	}
+	
+	/**
+	 * faiblesse
+	 * @param array $double_damage_to faiblesse
+	 * @return self
+	 */
+	public function setDouble_damage_to($double_damage_to): self {
+		$this->double_damage_to = $double_damage_to;
 		return $this;
 	}
 }

@@ -56,8 +56,8 @@ class DAO
     {
         $null = 'NULL';
 
-        $txt_req = "INSERT INTO `pokemon` (pokemon_id, pokemon_name, pokemon_element, pokemon_element2, pokemon_hp, pokemon_attack, pokemon_defense)";
-        $txt_req .= "VALUES (:pokemon_id, :pokemon_name, :pokemon_element, :pokemon_element2, :pokemon_hp, :pokemon_attack, :pokemon_defense)";
+        $txt_req = "INSERT INTO `pokemon` (pokemon_id, pokemon_name, pokemon_element, pokemon_element2, pokemon_hp, pokemon_attack, pokemon_defense, pokemon_damage_from, pokemon_damage_to)";
+        $txt_req .= "VALUES (:pokemon_id, :pokemon_name, :pokemon_element, :pokemon_element2, :pokemon_hp, :pokemon_attack, :pokemon_defense, :pokemon_damage_from, :pokemon_damage_to)";
 
         $stmt = $this->cnx->prepare($txt_req);
 
@@ -75,7 +75,12 @@ class DAO
         $stmt->bindParam(':pokemon_hp', $tablePokemon["pv"]);
         $stmt->bindParam(':pokemon_attack', $tablePokemon["attack"]);
         $stmt->bindParam(':pokemon_defense', $tablePokemon["defense"]);
+        $tablePokemon["double_damage_from"] = json_encode($tablePokemon["double_damage_from"]);
+        $tablePokemon["double_damage_to"] = json_encode($tablePokemon["double_damage_to"]);
+        $stmt->bindParam(':pokemon_damage_from', $tablePokemon["double_damage_from"]);
+        $stmt->bindParam(':pokemon_damage_to', $tablePokemon["double_damage_to"]);
 
+        var_dump($stmt);
         $stmt->execute();
         return $stmt->rowCount();
         
@@ -90,7 +95,7 @@ class DAO
         $i = 0;
         
         // préparation de la requête de recherche
-        $txt_req = "Select pokemon_name, pokemon_element, pokemon_element2, pokemon_hp, pokemon_attack, pokemon_defense";
+        $txt_req = "Select pokemon_name, pokemon_element, pokemon_element2, pokemon_hp, pokemon_attack, pokemon_defense, pokemon_damage_from, pokemon_damage_to";
         $txt_req .= " from pokemon";
 
         $req = $this->cnx->prepare($txt_req);
@@ -113,8 +118,10 @@ class DAO
             $pokemon_hp = $uneLigne->pokemon_hp;
             $pokemon_damage = $uneLigne->pokemon_attack;
             $pokemon_defense = $uneLigne->pokemon_defense;
+            $pokemon_damage_from = $uneLigne->pokemon_damage_from;
+            $pokemon_damage_to = $uneLigne->pokemon_damage_to;
              
-            $unePokemon = new Pokemon($pokemon_name, $pokemon_element, $pokemon_element2, $pokemon_hp, $pokemon_damage, $pokemon_defense);
+            $unePokemon = new Pokemon($pokemon_name, $pokemon_element, $pokemon_element2, $pokemon_hp, $pokemon_damage, $pokemon_defense, $pokemon_damage_from, $pokemon_damage_to);
             $lesPokemons[$i] = $unePokemon;
             $i++;
         }
