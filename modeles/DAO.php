@@ -54,6 +54,8 @@ class DAO
     // Créer un nouveau pokémon
     public function insertPokemon($tablePokemon)
     {
+        $null = 'NULL';
+
         $txt_req = "INSERT INTO `pokemon` (pokemon_id, pokemon_name, pokemon_element, pokemon_element2, pokemon_hp, pokemon_attack, pokemon_defense)";
         $txt_req .= "VALUES (:pokemon_id, :pokemon_name, :pokemon_element, :pokemon_element2, :pokemon_hp, :pokemon_attack, :pokemon_defense)";
 
@@ -62,7 +64,14 @@ class DAO
         $stmt->bindParam(':pokemon_id', $tablePokemon["id"]);
         $stmt->bindParam(':pokemon_name', $tablePokemon["name"]);
         $stmt->bindParam(':pokemon_element', $tablePokemon["element_primary"]);
-        $stmt->bindParam(':pokemon_element2', $tablePokemon["element_secondary"]);
+        if($tablePokemon["element_secondary"] != NULL)
+        {
+            $stmt->bindParam(':pokemon_element2', $tablePokemon["element_secondary"]);
+        }
+        else
+        {
+            $stmt->bindParam(':pokemon_element2', $null);
+        }
         $stmt->bindParam(':pokemon_hp', $tablePokemon["pv"]);
         $stmt->bindParam(':pokemon_attack', $tablePokemon["attack"]);
         $stmt->bindParam(':pokemon_defense', $tablePokemon["defense"]);
@@ -98,12 +107,12 @@ class DAO
         {
         
             // création d'un objet Pokemon (encodage pour la sécurité)
-            $pokemon_name = utf8_encode($uneLigne->pokemon_name);
-            $pokemon_element = utf8_encode($uneLigne->pokemon_element);
-            $pokemon_element2 = utf8_encode($uneLigne->pokemon_element2);
-            $pokemon_hp = utf8_encode($uneLigne->pokemon_hp);
-            $pokemon_damage = utf8_encode($uneLigne->pokemon_attack);
-            $pokemon_defense = utf8_encode($uneLigne->pokemon_defense);
+            $pokemon_name = $uneLigne->pokemon_name;
+            $pokemon_element = $uneLigne->pokemon_element;
+            $pokemon_element2 = $uneLigne->pokemon_element2;
+            $pokemon_hp = $uneLigne->pokemon_hp;
+            $pokemon_damage = $uneLigne->pokemon_attack;
+            $pokemon_defense = $uneLigne->pokemon_defense;
              
             $unePokemon = new Pokemon($pokemon_name, $pokemon_element, $pokemon_element2, $pokemon_hp, $pokemon_damage, $pokemon_defense);
             $lesPokemons[$i] = $unePokemon;
