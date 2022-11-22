@@ -15,12 +15,36 @@
     // chargement de la vue
     // include_once ('vues/VueCalendrier.php');
 
-    for ($i=0; $i < count($tablePokemon); $i++)
-    {
-        echo $tablePokemon[$i]->getName() . "<br/>";
-        for($n=0; $n<count($tablePokemon[$i]->getDouble_damage_from()); $n++)
-        {
-            echo json_encode($tablePokemon[$i]->getDouble_damage_from()[$n]) ."<br/>";
-        }
-    }
+    // for ($i=0; $i < count($tablePokemon); $i++)
+    // {
+        echo "<hr>". $tablePokemon[0]->getName() . "<br/>";
+    // }
+    echo "faiblesse: ". json_encode($tablePokemon[0]->getDouble_damage_from()) ."<br>";
+    echo "defense: ".$tablePokemon[0]->getDefense() ."<br>";
+    echo "pv: ".$tablePokemon[0]->getHp() ."<br>";
+
+    // $element = $tablePokemon[3]->getElement();
+    // $degat = $tablePokemon[3]->getDamage();
+
+    // for($n=0; $n<count($tablePokemon[0]->getDouble_damage_from()); $n++)
+    // {
+    //     if('"'.$element.'"' == json_encode($tablePokemon[0]->getDouble_damage_from()[$n]))
+    //     {
+    //         $degat = $degat * 2;
+    //         echo $degat ."<br>";
+    //         break;
+    //     }
+    //     echo $degat."<br>";
+    // }
+
+    // echo $tablePokemon[3]->getName() . "<br/>";
+
+    $tablePokemon[0]->attacked($tablePokemon[3]->getDamage(), $tablePokemon[3]->getElement());
+
+    echo "<hr>attaque: ".$tablePokemon[3]->getDamage() ."<br>";
+    echo "element: ". $tablePokemon[3]->getElement();
+
+    echo "<hr> degat reel: ".$tablePokemon[0]->getDamagesSuffered() ."<br>";
+    echo "defense: ".$tablePokemon[0]->getDefense() ."<br>";
+    echo "pv: ".$tablePokemon[0]->getHp() ."<br>";
 ?>

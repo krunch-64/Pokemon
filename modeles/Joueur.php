@@ -1,41 +1,41 @@
 <?php
 
-class Joueur
+trait Joueur
 {
     /**
      * Identifiant du joueur
      * @var int
      */
-    protected $id;
+    protected $idJoueur = 1;
 
     /**
      * Nom du jouer 
      * @var string
      */
-    protected $nameJoueur;
+    protected $nameJoueur = 'Guest1';
 
     /**
      * score du joueur
      * @var int
      */
-    protected $score;
+    protected $score = 0;
 
     /**
      * date du jeu
      * @var string
      */
-    protected $date;
+    protected $date = '23/11';
 
     /**
      * Construct de la class Joueur
-     * @param int $id
+     * @param int $idJoueur
      * @param string $nameJoueur
      * @param int $score
      * @param string $date
      */
-    public function __construct(int $id, string $nameJoueur, int $score, string $date)
+    public function __construct(int $idJoueur, string $nameJoueur, int $score, string $date)
     {
-        $this->id = $id;
+        $this->idJoueur = $idJoueur;
         $this->nameJoueur = $nameJoueur;
         $this->score = $score;
         $this->date = $date;
@@ -47,17 +47,17 @@ class Joueur
 	 * Identifiant du joueur
 	 * @return int
 	 */
-	public function getId() {
-		return $this->id;
+	public function getIdJoueur() {
+		return $this->idJoueur;
 	}
 	
 	/**
 	 * Identifiant du joueur
-	 * @param int $id Identifiant du joueur
+	 * @param int $idJoueur Identifiant du joueur
 	 * @return self
 	 */
-	public function setId($id): self {
-		$this->id = $id;
+	public function setId($idJoueur): self {
+		$this->idJoueur = $idJoueur;
 		return $this;
 	}
 

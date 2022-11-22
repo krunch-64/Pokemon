@@ -1,7 +1,12 @@
 <?php
 
+require_once('../modeles/Joueur.php');
+
 class Pokemon
 {
+	// on a access aux fonctions de Joueur
+	use Joueur;
+
 	/**
 	 * Identifiant du Pokémon
 	 * @var int
@@ -93,7 +98,7 @@ class Pokemon
 		// si le damage_from correspond au type d'attaque de l'ennemie alors double degat
 		for($n=0; $n<count($this->getDouble_damage_from()); $n++)
         {
-            if($element == json_encode($this->getDouble_damage_from()[$n]))
+            if('"'.$element.'"' == json_encode($this->getDouble_damage_from()[$n]))
 			{
 				$degat = $degat * 2;
 				break;
@@ -102,7 +107,7 @@ class Pokemon
 
         if($this->getDefense() > 0)
         {
-            $this->setDefense($this->getDefense() * 0.10);
+            $this->setDefense($this->getDefense() - 10);
             $this->setDamagesSuffered($degat - $this->getDefense());
         }
         else
@@ -117,24 +122,25 @@ class Pokemon
 
         $this->setHp($this->getHp()-$this->getDamagesSuffered());
 
-        if($this->getHp() < 0)
+        if($this->getHp() <= 0)
         {
             $this->setHp(0);
+			$this->setScore($this->getScore()+1);
         }
 
         return $this;
     }
 
-	/**
-     * degat fait par le pokemon
-     * @return int
-     */
-    public function attack(): int
-    {
-		// si le damage_f correspond au type d'attaque de l'ennemie alors double degat
+	// /**
+    //  * degat fait par le pokemon
+    //  * @return int
+    //  */
+    // public function attack(): int
+    // {
+	// 	// si le damage_f correspond au type d'attaque de l'ennemie alors double degat
 
-        return $this->getDamage();
-    }
+    //     return $this->getDamage();
+    // }
 
 	// GETTER ET SETTER
 	/**
@@ -154,7 +160,7 @@ class Pokemon
 		$this->id = $id;
 		return $this;
 	}
-	
+
 	/**
 	 * Nom du Pokémon
 	 * @return string
