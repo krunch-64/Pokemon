@@ -2,6 +2,12 @@
 
 class Pokemon
 {
+	/**
+	 * Identifiant du Pokémon
+	 * @var int
+	 */
+	protected $id;
+
     /**
      * Nom du Pokémon
      * @var string
@@ -46,17 +52,19 @@ class Pokemon
 
 	/**
 	 * faiblesse
-	 * @var int
+	 * @var array
 	 */
+	protected $weakness;
 
     /**
      * Contruct de la classe Pokémon
+	 * @param int $id
      * @param string $name
      * @param string $element
      * @param string $element2
      * @param int $hp
      */
-    public function __construct(string $name, string $element, string $element2, int $hp, int $damage, int $defense)
+    public function __construct(string $name, string $element, string $element2, int $hp, int $damage, int $defense, array $weakness)
     {
         $this->name = $name;
         $this->element = $element;
@@ -64,6 +72,7 @@ class Pokemon
         $this->hp = $hp;
         $this->damage = $damage;
         $this->defense = $defense;
+		$this->weakness = $weakness;
     }
 
 	 /**
