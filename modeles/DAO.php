@@ -52,13 +52,24 @@ class DAO
     // ------------------------------------------------------------------------------------------------------
     
     // Créer un nouveau pokémon
-    public function insertPokemon()
+    public function insertPokemon($tablePokemon)
     {
         $txt_req = "INSERT INTO `pokemon` (pokemon_id, pokemon_name, pokemon_element, pokemon_element2, pokemon_hp, pokemon_attack, pokemon_defense)";
-        $txt_req .= "VALUES ('14', 'salameche', 'feu', 'dragon', '90', '100', '50')";
+        $txt_req .= "VALUES (:pokemon_id, :pokemon_name, :pokemon_element, :pokemon_element2, :pokemon_hp, :pokemon_attack, :pokemon_defense)";
 
-        $req = $this->cnx->exec($txt_req);
-        echo $req;
+        $stmt = $this->cnx->prepare($txt_req);
+
+        $stmt->bindParam(':pokemon_id', $tablePokemon["id"]);
+        $stmt->bindParam(':pokemon_name', $tablePokemon["name"]);
+        $stmt->bindParam(':pokemon_element', $tablePokemon["element_primary"]);
+        $stmt->bindParam(':pokemon_element2', $tablePokemon["element_secondary"]);
+        $stmt->bindParam(':pokemon_hp', $tablePokemon["pv"]);
+        $stmt->bindParam(':pokemon_attack', $tablePokemon["attack"]);
+        $stmt->bindParam(':pokemon_defense', $tablePokemon["defense"]);
+
+        $stmt->execute();
+        return $stmt->rowCount();
+        
     }
 
     // retourne la liste des Pokemons sous forme de tableau d'objets
