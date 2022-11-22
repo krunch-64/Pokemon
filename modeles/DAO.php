@@ -8,7 +8,8 @@
 
 // inclusion des paramètres de l'application et de la classe Course
 include_once('param.php');
-require_once('../modeles/Pokemon.php');
+require_once('./modeles/Pokemon.php');
+require_once('./modeles/Joueur.php');
 
 // début de la classe DAO (Data Access Object)
 class DAO
@@ -113,7 +114,7 @@ class DAO
         while ($uneLigne = $req->fetch(PDO::FETCH_OBJ))
         {
         
-            // création d'un objet Pokemon (encodage pour la sécurité)
+            // création d'un objet Pokemon
             $pokemon_name = $uneLigne->pokemon_name;
             $pokemon_element = $uneLigne->pokemon_element;
             $pokemon_element2 = $uneLigne->pokemon_element2;
@@ -128,6 +129,45 @@ class DAO
             $i++;
         }
         return $lesPokemons;
+    }
+
+    //retourne la liste des joueurs sous forme de tableau d'objet
+    public function getListeJoueur()
+    {
+        // Tableau de Joueurs
+        $lesJoueurs = array();
+        
+        $i = 0;
+        
+        // préparation de la requête de recherche
+        $txt_req = "Select joueur_id, joueur_name, joueur_score, date";
+        $txt_req .= " from joueur";
+
+
+        $req = $this->cnx->prepare($txt_req);
+        
+        // liaison de la requête et de ses paramètres
+        // $req->bindValue("param1", $param1, PDO::PARAM_STR);
+        
+        // extraction des données
+        $req->execute();
+        
+        
+        // traitement de la réponse
+        while ($uneLigne = $req->fetch(PDO::FETCH_OBJ))
+        {
+        
+            // création d'un objet joueur
+            $joueur_id = $uneLigne->joueur_id;
+            $joueur_name = $uneLigne->joueur_name;
+            $joueur_score = $uneLigne->joueur_score;
+            $date = $uneLigne->date;
+             
+            $unJoueur = new Joueur($joueur_id, $joueur_name, $joueur_score, $date);
+            $lesJoueurs[$i] = $unJoueur;
+            $i++;
+        }
+        return $lesJoueurs;
     }
 }
 

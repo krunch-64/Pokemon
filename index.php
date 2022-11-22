@@ -1,20 +1,23 @@
 <?php 
 if (!isset($_GET['action']))
 {
-    $action = 'Accueil';
+    $action = 'accueil';
 }
 else
 {
     $action = $_GET['action'];
 }
 switch($action){
-	case 'Accueil': {
+	case 'accueil': {
 		include_once ('controleurs/CtrlAccueil.php'); break;
 	}
-	case 'Arena': {
+	case 'list': {
+		include_once ('controleurs/CtrlList.php'); break;
+	}
+	case 'arena': {
 	    include_once ('controleurs/CtrlArena.php'); break;
 	}
-	case 'Tableaux': {
+	case 'score': {
 		include_once ('controleurs/CtrlTableaux.php'); break;
 	}
 	default : {

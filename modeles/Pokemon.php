@@ -87,13 +87,21 @@ class Pokemon
      * @param int $degat
      * @return self
      */
-    public function attacked($degat): self
+    public function attacked($degat, $element): self
     {   
 		// si le damage_from correspond au type d'attaque de l'ennemie alors double degat
+		for($n=0; $n<count($this->getDouble_damage_from()); $n++)
+        {
+            if($element == json_encode($this->getDouble_damage_from()[$n]))
+			{
+				$degat = $degat * 2;
+				break;
+			}
+        }
 
         if($this->getDefense() > 0)
         {
-            $this->setDefense($this->getDefense() - 10);
+            $this->setDefense($this->getDefense() * 0.10);
             $this->setDamagesSuffered($degat - $this->getDefense());
         }
         else
