@@ -67,7 +67,7 @@ function get_pokemon_stat(string $id)
     return $table;
 }
 
-// var_dump(get_pokemon_stat(1));
+var_dump(get_pokemon_stat(1));
 /** la fonction translate_name_pokemon permet de traduire le nom de pokemon en anglais en français
  * @param string $response page pokemon
  * @return string $name pokemon in french
