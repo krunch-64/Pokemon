@@ -51,39 +51,45 @@ class DAO
     // -------------------------------------- Méthodes d'instances ------------------------------------------
     // ------------------------------------------------------------------------------------------------------
     
-    /*// retourne la course sous forme d'objet
-    public function getUneCourse(string $pnom)
+    /*// retourne le calendrier des courses sous forme de tableau d'objets
+    public function getCalendrier()
     {
-
+        // Tableau de courses
+        $lesCourses = array();
+        
+        $i = 0;
+        
         // préparation de la requête de recherche
         $txt_req = "Select nom, lieu, date, heureDepart, distance, prix, challenge";
         $txt_req .= " from course";
-        $txt_req .= " where nom = :nom";
-        echo $txt_req;
 
         $req = $this->cnx->prepare($txt_req);
         
         // liaison de la requête et de ses paramètres
-        $req->bindValue("nom", $pnom, PDO::PARAM_STR);
+        // $req->bindValue("param1", $param1, PDO::PARAM_STR);
         
         // extraction des données
         $req->execute();
         
         
         // traitement de la réponse
-        $uneLigne = $req->fetch(PDO::FETCH_OBJ);
-        // création d'un objet Course (encodage pour la sécurité)
-        $unNom = utf8_encode($uneLigne->nom);
-        $unLieu = utf8_encode($uneLigne->lieu);
-        $uneDate = utf8_encode($uneLigne->date);
-        $uneHeureDepart = utf8_encode($uneLigne->heureDepart);
-        $uneDistance = utf8_encode($uneLigne->distance);
-        $unPrix = utf8_encode($uneLigne->prix);
-        $unChallenge = utf8_encode($uneLigne->challenge);
-
-        $uneCourse = new Course($unNom, $unLieu, $uneDate, $uneHeureDepart, $uneDistance, $unPrix, $unChallenge);
-
-        return $uneCourse;
+        while ($uneLigne = $req->fetch(PDO::FETCH_OBJ))
+        {
+        
+            // création d'un objet Course (encodage pour la sécurité)
+            $unNom = utf8_encode($uneLigne->nom);
+            $unLieu = utf8_encode($uneLigne->lieu);
+            $uneDate = utf8_encode($uneLigne->date);
+            $uneHeureDepart = utf8_encode($uneLigne->heureDepart);
+            $uneDistance = utf8_encode($uneLigne->distance);
+            $unPrix = utf8_encode($uneLigne->prix);
+            $unChallenge = utf8_encode($uneLigne->challenge);
+             
+            $uneCourse = new Course($unNom, $unLieu, $uneDate, $uneHeureDepart, $uneDistance, $unPrix, $unChallenge);
+            $lesCourses[$i] = $uneCourse;
+            $i++;
+        }
+        return $lesCourses;
     }*/
 
 }
