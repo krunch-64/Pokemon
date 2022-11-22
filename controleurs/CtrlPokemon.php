@@ -8,16 +8,17 @@
 
     $dao = new DAO();
 
-    // récupération du tableau des courses
-    $tabCourses = $dao->getListePokemon();
+    // récupération du tableau des Pokemon
+    $tabPokemon = $dao->getListePokemon();
     
     // fermeture de la connexion à MySQL
     unset($dao);
 
     // chargement de la vue
     // include_once ('vues/VueCalendrier.php');
-    for ($i=0; $i < count($tabCourses); $i++)
+    for ($i=0; $i < count($tabPokemon); $i++)
     {
-        echo $tabCourses[$i]->getName() . "<br/>";
+        echo $tabPokemon[$i]->getName() . "<br/>";
+        echo json_decode($tablePokemon[$i]->getDouble_damage_from());
     }
 ?>

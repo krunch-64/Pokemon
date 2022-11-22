@@ -98,6 +98,8 @@ class DAO
         $txt_req = "Select pokemon_name, pokemon_element, pokemon_element2, pokemon_hp, pokemon_attack, pokemon_defense, pokemon_damage_from, pokemon_damage_to";
         $txt_req .= " from pokemon";
 
+        // faire juste quand le pokemon est utiliser /* where personne_id =id */
+
         $req = $this->cnx->prepare($txt_req);
         
         // liaison de la requête et de ses paramètres
@@ -121,7 +123,7 @@ class DAO
             $pokemon_damage_from = $uneLigne->pokemon_damage_from;
             $pokemon_damage_to = $uneLigne->pokemon_damage_to;
              
-            $unePokemon = new Pokemon($pokemon_name, $pokemon_element, $pokemon_element2, $pokemon_hp, $pokemon_damage, $pokemon_defense, $pokemon_damage_from, $pokemon_damage_to);
+            $unePokemon = new Pokemon($pokemon_name, $pokemon_element, $pokemon_element2, $pokemon_hp, $pokemon_damage, $pokemon_defense, json_decode($pokemon_damage_from), json_decode($pokemon_damage_to));
             $lesPokemons[$i] = $unePokemon;
             $i++;
         }

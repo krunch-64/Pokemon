@@ -122,7 +122,7 @@ class Pokemon
      */
     public function attack(): int
     {
-		// si le damage_to correspond au type d'element de l'ennemie alors double degat
+		// si le damage_f correspond au type d'attaque de l'ennemie alors double degat
 
         return $this->getDamage();
     }
