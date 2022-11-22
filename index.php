@@ -1,19 +1,21 @@
 <?php 
 include 'vendor/autoload.php';
 
-function get_pokemon_list() {
+function request(string $url)
+{
     $client = new \GuzzleHttp\Client();
-    $response = $client->request('GET', 'https://pokeapi.co/api/v2/pokemon');
+    $response = $client->request('GET',$url);
+    return json_decode($response->getBody());
+}
 
-    //echo $response->getStatusCode(); // 200
-    //echo $response->getHeaderLine('content-type'); // 'application/json; charset=utf8'
-    $body =  $response->getBody(); // '{"id": 1420053, "name": "guzzle", ...}'
-    $parsed_json = json_decode($body);
-    var_dump($parsed_json->{'next'});
+function get_pokemon_list() {
+    $result = request('https://pokeapi.co/api/v2/');
+
+    var_dump($result->{'next'});
     echo '<hr>';
-    var_dump($parsed_json->{'previous'});
+    var_dump($result->{'previous'});
     echo '<hr>';
-    $pokemons =  $parsed_json->{'results'};
+    $pokemons =  $result->{'results'};
     foreach($pokemons as $pokemon) {
         //var_dump($pokemon) ;
         $url = $pokemon->{'url'};
@@ -22,10 +24,12 @@ function get_pokemon_list() {
         <p><?= translate_name_pokemon($name) ?></p><?php 
         
     }
-    ?><button href="">précedent</button> 
-    <button href="">suivant</button> <?php
+    ?><button href="<?= request($result->{'previous'}) ?>">précedent</button> 
+    <button href="<?= request($result->{'next'}) ?>">suivant</button> <?php
     echo '<hr>';
 };
+
+
 
 get_pokemon_list();
 
