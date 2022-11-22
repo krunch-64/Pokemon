@@ -1,5 +1,8 @@
 <?php
     // Rôle : afficher la liste des pokémon
+    
+    // connexion du serveur web à la base MySQL
+    include_once ('../modeles/DAO.php');
 
     $dao = new DAO();
 

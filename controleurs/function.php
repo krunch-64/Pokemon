@@ -10,7 +10,7 @@ function request(string $url)
 
 
 function get_pokemon_list() {
-    $result = request('https://pokeapi.co/api/v2/pokemon?offset=30&limit=30');
+    $result = request('https://pokeapi.co/api/v2/pokemon?offset=0&limit=24');
 
     $pokemons =  $result->{'results'};
     foreach($pokemons as $pokemon) {
@@ -19,11 +19,10 @@ function get_pokemon_list() {
         $name = $pokemon->{'name'};
         ?> <div class="card ">
             <img alt='<?= $name ?>' src="<?= get_Sprites($id,'front') ?>">
-            <p><?= translate_name_pokemon($name) ?></p>
+            <p alt='<?= $id ?>'><?= translate_name_pokemon($name) ?></p>
         </div> <?php 
     }
 };
-
 
 /** La fonction get_front_sprites permet de récupré la front sprites d'un pokemon
  * @param string $id d'un pokemon
@@ -47,22 +46,28 @@ function get_pokemon_stat(string $id)
     $parsed_json = request('https://pokeapi.co/api/v2/pokemon/'.$id);
 
 
-    $table = array(
-    'id' =>  $id,
+    $damage_relations = request($parsed_json->{'types'}[0]->{'type'}->{'url'})->{'damage_relations'} ;
+    $double_damage_from = $damage_relations->{'double_damage_from'};
+    $double_damage_to = $damage_relations->{'double_damage_to'};
+    $table_from = [];
+    foreach ($double_damage_from as $key => $relation) {$table_from += [$key => $relation->{'name'}];}
+    $table_to = [];
+    foreach ($double_damage_to as $key => $relation ) {$table_to += [$key => $relation->{'name'}];}
+    $table = [
+    'id' =>  (int)$id,
     'name' => $parsed_json->{'name'},
     'element_primary' => $parsed_json->{'types'}[0]->{'type'}->{'name'},
     'element_secondary' => $parsed_json->{'types'}[1]->{'type'}->{'name'},
     'pv' => $parsed_json->{'stats'}[0]->{'base_stat'},
     'attack' => $parsed_json->{'stats'}[1]->{'base_stat'},
     'defense' => $parsed_json->{'stats'}[2]->{'base_stat'},
-    'special_attack' => $parsed_json->{'stats'}[3]->{'base_stat'},
-    'special_defense' => $parsed_json->{'stats'}[4]->{'base_stat'},
-    'speed' => $parsed_json->{'stats'}[5]->{'base_stat'}
-    );
+    'double_damage_from' => $table_from,
+    'double_damage_to' => $table_to,
+    ];
     return $table;
 }
 
-// var_dump(get_pokemon_list(50));
+var_dump(get_pokemon_stat(1));
 /** la fonction translate_name_pokemon permet de traduire le nom de pokemon en anglais en français
  * @param string $response page pokemon
  * @return string $name pokemon in french
