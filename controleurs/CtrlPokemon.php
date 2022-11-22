@@ -1,6 +1,10 @@
 <?php
     // Rôle : afficher la liste des pokémon
 
+    // Récupération des données de l'api
+    include_once('./function.php');
+    $tablePokemon = get_pokemon_stat();
+
     // connexion du serveur web à la base MySQL
     include_once ('../modeles/DAO.php');
     $dao = new DAO();
