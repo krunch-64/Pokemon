@@ -7,8 +7,8 @@
 // __destruct() : le destructeur ferme la connexion $cnx à la base de données
 
 // inclusion des paramètres de l'application et de la classe Course
-require_once('param.php');
-require_once('./Pokemon.php');
+include_once('param.php');
+require_once('../modeles/Pokemon.php');
 
 // début de la classe DAO (Data Access Object)
 class DAO
@@ -51,17 +51,27 @@ class DAO
     // -------------------------------------- Méthodes d'instances ------------------------------------------
     // ------------------------------------------------------------------------------------------------------
     
-    /*// retourne le calendrier des courses sous forme de tableau d'objets
-    public function getCalendrier()
+    // Créer un nouveau pokémon
+    public function insertPokemon()
     {
-        // Tableau de courses
-        $lesCourses = array();
+        $txt_req = "INSERT INTO `pokemon` (pokemon_id, pokemon_name, pokemon_element, pokemon_element2, pokemon_hp, pokemon_attack, pokemon_defense)";
+        $txt_req .= "VALUES ('14', 'salameche', 'feu', 'dragon', '90', '100', '50')";
+
+        $req = $this->cnx->exec($txt_req);
+        echo $req;
+    }
+
+    // retourne la liste des Pokemons sous forme de tableau d'objets
+    public function getListePokemon()
+    {
+        // Tableau de Pokemons
+        $lesPokemons = array();
         
         $i = 0;
         
         // préparation de la requête de recherche
-        $txt_req = "Select nom, lieu, date, heureDepart, distance, prix, challenge";
-        $txt_req .= " from course";
+        $txt_req = "Select pokemon_name, pokemon_element, pokemon_element2, pokemon_hp, pokemon_attack, pokemon_defense";
+        $txt_req .= " from pokemon";
 
         $req = $this->cnx->prepare($txt_req);
         
@@ -76,22 +86,20 @@ class DAO
         while ($uneLigne = $req->fetch(PDO::FETCH_OBJ))
         {
         
-            // création d'un objet Course (encodage pour la sécurité)
-            $unNom = utf8_encode($uneLigne->nom);
-            $unLieu = utf8_encode($uneLigne->lieu);
-            $uneDate = utf8_encode($uneLigne->date);
-            $uneHeureDepart = utf8_encode($uneLigne->heureDepart);
-            $uneDistance = utf8_encode($uneLigne->distance);
-            $unPrix = utf8_encode($uneLigne->prix);
-            $unChallenge = utf8_encode($uneLigne->challenge);
+            // création d'un objet Pokemon (encodage pour la sécurité)
+            $pokemon_name = utf8_encode($uneLigne->pokemon_name);
+            $pokemon_element = utf8_encode($uneLigne->pokemon_element);
+            $pokemon_element2 = utf8_encode($uneLigne->pokemon_element2);
+            $pokemon_hp = utf8_encode($uneLigne->pokemon_hp);
+            $pokemon_damage = utf8_encode($uneLigne->pokemon_attack);
+            $pokemon_defense = utf8_encode($uneLigne->pokemon_defense);
              
-            $uneCourse = new Course($unNom, $unLieu, $uneDate, $uneHeureDepart, $uneDistance, $unPrix, $unChallenge);
-            $lesCourses[$i] = $uneCourse;
+            $unePokemon = new Pokemon($pokemon_name, $pokemon_element, $pokemon_element2, $pokemon_hp, $pokemon_damage, $pokemon_defense);
+            $lesPokemons[$i] = $unePokemon;
             $i++;
         }
-        return $lesCourses;
-    }*/
-
+        return $lesPokemons;
+    }
 }
 
 ?>
