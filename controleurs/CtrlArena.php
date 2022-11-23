@@ -13,8 +13,10 @@
     // fermeture de la connexion à MySQL
     unset($dao);
     
-    $u = 0;
-    $c = 0;
+    $_SESSION['pkmn1_increment'] = 0;
+    $_SESSION['pkmn2_increment'] = 0;
+
+
 
     // chargement de la vue arena
     include_once('./views/arena.php');

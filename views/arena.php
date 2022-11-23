@@ -1,4 +1,5 @@
 <?php 
+    
     $_SESSION['pkmn1_name'] = $tablePokemonUser[$_SESSION['pkmn1_increment']]->getName();
     $_SESSION['pkmn2_name'] = $tablePokemonComputer[$_SESSION['pkmn2_increment']]->getName();
     
@@ -15,8 +16,7 @@
     $_SESSION['pkmn1_health'] = $tablePokemonUser[$_SESSION['pkmn1_increment']]->getHp();
     $_SESSION['pkmn2_health'] = $tablePokemonComputer[$_SESSION['pkmn2_increment']]->getHp();
 
-    $_SESSION['pkmn1_increment'] = 0;
-    $_SESSION['pkmn2_increment'] = 0;
+    
 
 ?>
 
@@ -92,6 +92,9 @@
 
     </div>
     <div id="test">
+        
+    </div>
+    <div id="test2">
         
     </div>
 

@@ -159,8 +159,16 @@ setInterval(function () {
     xhttp.open("GET", "./pkmn2.php", true);
     xhttp.send();
 
+    var xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+        document.querySelector('#test2').innerHTML = this.responseText;
+    };
+    xhttp.open("GET", "./refresh_ajax.php", true);
+    xhttp.send();
 
 
-}, 100);
+}, 200);
+
+
 
 
