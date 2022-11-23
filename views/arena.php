@@ -1,3 +1,14 @@
+<?php 
+    $_SESSION['pkmn1_name'] = $tablePokemonUser[$u]->getName();
+    $_SESSION['pkmn2_name'] = $tablePokemonComputer[$c]->getName();
+
+
+    $_SESSION['pkmn1_health'] = $tablePokemonUser[$u]->getHp();
+    $_SESSION['pkmn2_health'] = $tablePokemonComputer[$c]->getHp();
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -8,6 +19,7 @@
     
     <link rel="stylesheet" href="../assets/css/reset.css">
     <link rel="stylesheet" href="../assets/css/output.css">
+    <link rel="stylesheet" href="/assets/css/output.css">
 </head>
 <body id="arena">
     <div class="fight_window">
@@ -19,8 +31,7 @@
                 </div>
                 <div class="fight_window__player_space2__infos__ground">
                     <div id="pokemon2" class="pokemon-div pokemon2">
-                        
-                        
+                        <img class="full-s" src="./assets/img/25.png" alt="">
                     </div>
                 </div>
             </div>
@@ -30,8 +41,7 @@
             <div class="fight_window__player_space1__infos">
                 <div class="fight_window__player_space1__infos__ground">
                     <div id="pokemon1" class="pokemon-div pokemon1">
-                        
-                        
+                        <img class="full-s" src="./assets/img/384.png" alt="">
                     </div>
                     </div>
                     <div id="toAddPKMN1" class="fight_window__player_space1__infos__stats stats-hp-100">
