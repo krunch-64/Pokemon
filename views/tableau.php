@@ -8,6 +8,7 @@
     
     <link rel="stylesheet" href="./assets/css/reset.css">
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/output.css">
 </head>
 <body id="accueil">
     <div class="acueil_all">
@@ -29,7 +30,7 @@
                 </table>
             </div>
             <div class="buttons">
-                <a href="./index.php"><button class="first">Retour</button></a>
+                <a href="./index.php"><button class="first attacks_window__content__btn btn">Retour</button></a>
             </div>
         </div>
     </div>

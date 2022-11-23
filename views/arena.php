@@ -8,6 +8,7 @@
     
     <link rel="stylesheet" href="../assets/css/reset.css">
     <link rel="stylesheet" href="../assets/css/output.css">
+    <link rel="stylesheet" href="/assets/css/output.css">
 </head>
 <body id="arena">
     <div class="fight_window">
