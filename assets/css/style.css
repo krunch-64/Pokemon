@@ -87,9 +87,18 @@ table{
     overflow: hidden;
 }
 
+.btn-list {
+  display: flex;
+  justify-content: center;
+}
+
 .liste .card .img-list {
   height: 90px;
   float: left;
+}
+
+.card:checked {
+  background-color: antiquewhite;
 }
 
 h4 {
