@@ -1,6 +1,6 @@
 <?php
 
-require_once('../modeles/Joueur.php');
+require_once('./modeles/Joueur.php');
 
 class Pokemon
 {

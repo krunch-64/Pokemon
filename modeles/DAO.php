@@ -8,8 +8,8 @@
 
 // inclusion des paramètres de l'application et de la classe Course
 include_once('param.php');
-require_once('../modeles/Pokemon.php');
-require_once('../modeles/Joueur.php');
+require_once('./modeles/Pokemon.php');
+require_once('./modeles/Joueur.php');
 
 // début de la classe DAO (Data Access Object)
 class DAO
