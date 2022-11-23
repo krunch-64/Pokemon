@@ -25,7 +25,7 @@
                 <?php for ($i=offset(); $i < 6; $i++) : ?>
                     <div class="card">
                         <img class="img-list" src="<?= $tablePokemon[$i]->getImg_front(); ?>"/>
-                        <p class="text-list"><?= $tablePokemon[$i]->getName() ?></p>
+                        <p style="line-height:65px;" class="text-list"><?= $tablePokemon[$i]->getName() ?></p>
                     </div>
 
                     <?php endfor; ?>

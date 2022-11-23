@@ -28,7 +28,7 @@ html {
     text-align:center;
     margin:auto;
     display:flex;
-    height: 30%;
+    height: 20%;
 }
 
 .paragraphe {
@@ -70,7 +70,13 @@ table{
     margin: auto;
     display: grid; 
     grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+    gap: 10px;
+    overflow: hidden;
+}
+
+.liste .card .img-list {
+  height: 90px;
+  float: left;
 }
 
 h4 {
