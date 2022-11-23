@@ -38,7 +38,7 @@ function list_offset(int $offset,$tablePokemon)
     ?><?php for ($offset; $offset < $offset_max; $offset++) : ?>
         <div class="card">
             <img class="img-list" src="<?= $tablePokemon[$offset]->getImg_front(); ?>"/>
-            <p class="text-list"><?= translate_name_pokemon($tablePokemon[$offset]->getName()) ?></p>
+            <p style="line-height:65px;" class="text-list"><?= translate_name_pokemon($tablePokemon[$offset]->getName()) ?></p>
         </div>
 
     <?php endfor; ?><?php
