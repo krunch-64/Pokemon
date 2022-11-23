@@ -87,6 +87,25 @@ class DAO
         
     }
 
+    // Créer un nouveau pokémon
+    public function insertJoueur($tableJoueur)
+    {
+        $txt_req = "INSERT INTO `joueur` (`joueur_id`, `joueur_name`, `joueur_score`, `date`)";
+        $txt_req .= "VALUES (:joueur_id, :joueur_name, :joueur_score, :date)";
+
+        $stmt = $this->cnx->prepare($txt_req);
+
+        $stmt->bindParam(':joueur_id', $tableJoueur["id"]);
+        $stmt->bindParam(':joueur_name', $tableJoueur["name"]);
+        $stmt->bindParam(':joueur_score', $tableJoueur["score"]);
+        $stmt->bindParam(':date', $tableJoueur["date"]);
+
+        var_dump($stmt);
+        $stmt->execute();
+        return $stmt->rowCount();
+        
+    }
+
     // retourne la liste des Pokemons de l'utilisateur sous forme de tableau d'objets
     public function getListePokemonUser()
     {
