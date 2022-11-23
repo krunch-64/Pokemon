@@ -17,19 +17,30 @@
                 <img src="./assets/img/logo.png" alt="">
             </a>
             <div class="tableau">
-                <table>
-                    <tr> <th>Date</th> <th>Score</th> <th>Adversaire</th> </tr>
-                    <?php
-                    for ($i=0; $i < count($tableJoueur); $i++)
+                <?php 
+                    if(count($tableJoueur) != 0)
                     {
                         ?>
-                        <tr> <td><?=$tableJoueur->getDate()?></td> <td><?= $tableJoueur->getScore() ?></td> <td><?= $tableJoueur->getNameJoueur() ?></td> </tr>
+                            <table>
+                                <tr> <th>Date</th> <th>Score</th> <th>Adversaire</th> </tr>
+                                <?php
+                                for ($i=0; $i < count($tableJoueur); $i++)
+                                {
+                                    ?>
+                                    <tr> <td><?=$tableJoueur->getDate()?></td> <td><?= $tableJoueur->getScore() ?></td> <td><?= $tableJoueur->getNameJoueur() ?></td> </tr>
+                                    <?php
+                                }
+                                ?>
+                            </table>
                         <?php
                     }
-                    ?>
-                </table>
+                    else
+                    {
+                        echo '<div class="paragraphe"><p>Aucun Score</p></div> ';
+                    }
+                ?>
             </div>
-            <div class="buttons">
+            <div class="button">
                 <a href="./index.php"><button class="first attacks_window__content__btn btn">Retour</button></a>
             </div>
         </div>
