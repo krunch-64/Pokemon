@@ -18,7 +18,7 @@
                 <p>Bienvenue sur notre jeu de combat Pokémon, devenez le meilleur dresseur !!!</p>
             </div>
             <div class="button">
-                <a href="./index.php?action=list"><button class="first attacks_window__content__btn btn">Lancer le combat</button></a>
+                <a href="./index.php?action=arena"><button class="first attacks_window__content__btn btn">Lancer le combat</button></a>
             </div>
             <div class="button">
                 <a href="./index.php?action=score"><button class="second attacks_window__content__btn btn">Tableau Score</button></a>

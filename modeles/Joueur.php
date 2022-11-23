@@ -1,6 +1,6 @@
 <?php
 
-trait Joueur
+class Joueur
 {
     /**
      * Identifiant du joueur
@@ -26,27 +26,19 @@ trait Joueur
      */
     protected $date = '23/11';
 
-	/**
-	 * pokemon du joueurs durant la partie
-	 * @var array
-	 */
-	protected $pokemon_user = [];
-
     /**
      * Construct de la class Joueur
      * @param int $idJoueur
      * @param string $nameJoueur
      * @param int $score
      * @param string $date
-	 * @param array $pokemon_user
      */
-    public function __construct(int $idJoueur, string $nameJoueur, int $score, string $date,array $pokemon_user)
+    public function __construct(int $idJoueur, string $nameJoueur, int $score, string $date)
     {
         $this->idJoueur = $idJoueur;
         $this->nameJoueur = $nameJoueur;
         $this->score = $score;
         $this->date = $date;
-		$this->pokemon_user = $pokemon_user;
     }
 
     
@@ -121,24 +113,6 @@ trait Joueur
 	public function setDate($date): self {
 		$this->date = $date;
 		return $this;
-	}
-
-	/**
-	 * les 3 pokemons du joueur durant sa partie
-	 * @param string $pokemon 
-	 * @return self
-	 */
-	public function setPokemon_user($pokemon): self {
-		$this->pokemon_user = $pokemon;
-		return $this;
-	}
-
-	/**
-	 * Les 3 pokemons du joueur durant sa partie
-	 * @return array
-	 */
-	public function getPokemon_user() {
-		return $this->pokemon_user;
 	}
 }
 ?>

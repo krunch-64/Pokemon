@@ -18,7 +18,7 @@
 </head>
 <body id="accueil">
     <div class="acueil_all">
-        <form class="block" method="POST" action='./index.php?action=list&amp;offset=<?= offset(); ?>'>
+        <form class="block" method="POST" action='./index.php?action=list'>
             <a href="./index.php">
                 <img src="./assets/img/logo-2.png" class="" alt="">
             </a>
@@ -51,7 +51,7 @@ function list_offset($tablePokemon)
 
 //$user = new Joueur(1,'user',0,'23/11',[]);
 
-list_checkbox();
+$list_id = list_checkbox();
 
 function list_checkbox () 
 {
@@ -64,8 +64,6 @@ function list_checkbox ()
         }
         
     }
-    
-    
 }
 
 //echo $user->getPokemon_user();

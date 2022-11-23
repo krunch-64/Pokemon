@@ -4,8 +4,6 @@ require_once('./modeles/Joueur.php');
 
 class Pokemon
 {
-	// on a access aux fonctions de Joueur
-	use Joueur;
 
 	/**
 	 * Identifiant du Pokémon
@@ -135,7 +133,6 @@ class Pokemon
         if($this->getHp() <= 0)
         {
             $this->setHp(0);
-			$this->setScore($this->getScore()+1);
         }
 
         return $this->getHp();
