@@ -1,6 +1,6 @@
 <?php 
 
-
+// Fonction pour la barre de vie
 
     function get_life_for_bar ($max_life,$life)
 
