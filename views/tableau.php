@@ -14,7 +14,7 @@
     <div class="acueil_all">
         <div class="block">
             <a href="./index.php">
-                <img src="./assets/img/logo.png" alt="">
+                <img src="./assets/img/logo-2.png" alt="">
             </a>
             <div class="tableau">
                 <?php 

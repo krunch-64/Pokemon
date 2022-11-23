@@ -19,7 +19,7 @@
     <div class="acueil_all">
         <div class="block">
             <a href="./index.php">
-                <img src="/assets/img/logo-2.png" class="" alt="">
+                <img src="./assets/img/logo-2.png" class="" alt="">
             </a>
             <h4>Choisissez 3 pokémons :</h4>
             <div class="liste">
