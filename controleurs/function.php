@@ -1,5 +1,5 @@
 <?php 
-include '../vendor/autoload.php';
+include './vendor/autoload.php';
 
 function request(string $url)
 {
@@ -10,6 +10,8 @@ function request(string $url)
 
 
 function get_pokemon_list() {
+    $max_offset = 24;
+    $offset = 0 ;
     $result = request('https://pokeapi.co/api/v2/pokemon?offset=0&limit=24');
 
     $pokemons =  $result->{'results'};
@@ -22,6 +24,8 @@ function get_pokemon_list() {
             <p alt='<?= $id ?>'><?= translate_name_pokemon($name) ?></p>
         </div> <?php 
     }
+    ?><a href="<?php if ($offset > 6){$offset = $offset - 6; }  ?>"><button>Précedent</button></a>
+    <a href="<?php if ($offset < $max_offset){$offset += 6 ;} else {$offset = 6;}?>"><button>Suivant</button></a><?php
 };
 
 /** La fonction get_front_sprites permet de récupré la front sprites d'un pokemon
@@ -37,6 +41,9 @@ function get_Sprites (string $id,$frame)
     
 }
 
+/*
+    Si tu peux reprendre juste l'url de l'image comme ca je la stocke dans ma base de donnée
+*/
 
 /** la fonction get_pokemon_stat permet de récupré les stats néssésaire pour crée une class pokemon
  * @param string $id
@@ -51,23 +58,21 @@ function get_pokemon_stat(string $id)
     $double_damage_to = $damage_relations->{'double_damage_to'};
     $table_from = [];
     foreach ($double_damage_from as $key => $relation) {$table_from += [$key => $relation->{'name'}];}
-    $table_to = [];
-    foreach ($double_damage_to as $key => $relation ) {$table_to += [$key => $relation->{'name'}];}
     $table = [
     'id' =>  (int)$id,
     'name' => $parsed_json->{'name'},
     'element_primary' => $parsed_json->{'types'}[0]->{'type'}->{'name'},
-    'element_secondary' => $parsed_json->{'types'}[1]->{'type'}->{'name'},
     'pv' => $parsed_json->{'stats'}[0]->{'base_stat'},
     'attack' => $parsed_json->{'stats'}[1]->{'base_stat'},
     'defense' => $parsed_json->{'stats'}[2]->{'base_stat'},
     'double_damage_from' => $table_from,
-    'double_damage_to' => $table_to,
+    'image_front' => get_Sprites($id,'front'),
+    'image_back' => get_Sprites($id,'back'),
     ];
     return $table;
 }
 
-var_dump(get_pokemon_stat(1));
+// var_dump(get_pokemon_stat(1));
 /** la fonction translate_name_pokemon permet de traduire le nom de pokemon en anglais en français
  * @param string $response page pokemon
  * @return string $name pokemon in french

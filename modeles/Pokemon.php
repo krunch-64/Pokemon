@@ -1,7 +1,12 @@
 <?php
 
+require_once('./modeles/Joueur.php');
+
 class Pokemon
 {
+	// on a access aux fonctions de Joueur
+	use Joueur;
+
 	/**
 	 * Identifiant du Pokémon
 	 * @var int
@@ -32,6 +37,12 @@ class Pokemon
      */
     protected $hp;
 
+	/**
+	 * PV max du Pokémon
+	 * @var int
+	 */
+	protected $hpmax;
+
     /**
      * Attaque du Pokémon
      * @var int
@@ -54,7 +65,19 @@ class Pokemon
 	 * faiblesse
 	 * @var array
 	 */
-	protected $weakness;
+	protected $double_damage_from;
+
+	/**
+	 * faiblesse
+	 * @var array
+	 */
+	protected $double_damage_to;
+
+	/**
+	 * img du pokemon
+	 * @var string
+	 */
+	protected $img;
 
     /**
      * Contruct de la classe Pokémon
@@ -63,28 +86,47 @@ class Pokemon
      * @param string $element
      * @param string $element2
      * @param int $hp
+	 * @param int $damage
+	 * @param int $defense
+	 * @param array $double_damage_from
+	 * @param array $double_damage_to
+	 * @param string $img
      */
-    public function __construct(string $name, string $element, string $element2, int $hp, int $damage, int $defense, array $weakness)
+    public function __construct(int $id, string $name, string $element, string $element2, int $hp, int $damage, int $defense, array $double_damage_from, array $double_damage_to, string $img)
     {
+		$this->id = $id;
         $this->name = $name;
         $this->element = $element;
         $this->element2 = $element2;
         $this->hp = $hp;
         $this->damage = $damage;
         $this->defense = $defense;
-		$this->weakness = $weakness;
-    }
+		$this->double_damage_from = $double_damage_from;
+		$this->double_damage_to = $double_damage_to;
+		$this->img = $img;
+	}
+
 
 	 /**
      * degat subit par le pokemon
      * @param int $degat
      * @return self
      */
-    public function attacked($degat): self
+    public function attacked($degat, $element): self
     {   
+		// si le damage_from correspond au type d'attaque de l'ennemie alors double degat
+		for($n=0; $n<count($this->getDouble_damage_from()); $n++)
+        {
+            if('"'.$element.'"' == json_encode($this->getDouble_damage_from()[$n]))
+			{
+				$degat = $degat * 2;
+				break;
+			}
+        }
+
         if($this->getDefense() > 0)
         {
-            $this->setDefense($this->getDefense() - 10);
+            $this->setDefense($this->getDefense() - ($this->getDefense()*0.10));
             $this->setDamagesSuffered($degat - $this->getDefense());
         }
         else
@@ -99,26 +141,55 @@ class Pokemon
 
         $this->setHp($this->getHp()-$this->getDamagesSuffered());
 
-        if($this->getHp() < 0)
+        if($this->getHp() <= 0)
         {
             $this->setHp(0);
+			$this->setScore($this->getScore()+1);
         }
 
         return $this;
     }
 
-	/**
-     * degat fait par le pokemon
-     * @return int
-     */
-    public function attack(): int
-    {
-		// if 
+	// /**
+    //  * degat fait par le pokemon
+    //  * @return int
+    //  */
+    // public function attack(): int
+    // {
+	// 	// si le damage_f correspond au type d'attaque de l'ennemie alors double degat
 
-        return $this->getDamage();
-    }
+    //     return $this->getDamage();
+    // }
+
+	// /**
+	//  * augmenter les pv quand il est sur le banc
+	//  * @return self
+	//  */
+	// public function addpv(): self
+	// {
+	// 	$this->setHp($this->getHp()+($this->getHp()*0.10));
+	// 	return $this;
+	// }
 
 	// GETTER ET SETTER
+	/**
+	 * Identifiant du Pokémon
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
+	
+	/**
+	 * Identifiant du Pokémon
+	 * @param int $id Identifiant du Pokémon
+	 * @return self
+	 */
+	public function setId($id): self {
+		$this->id = $id;
+		return $this;
+	}
+
 	/**
 	 * Nom du Pokémon
 	 * @return string
@@ -242,6 +313,78 @@ class Pokemon
 	 */
 	public function setDamagesSuffered($damagesSuffered): self {
 		$this->damagesSuffered = $damagesSuffered;
+		return $this;
+	}
+
+	/**
+	 * faiblesse
+	 * @return array
+	 */
+	public function getDouble_damage_from() {
+		return $this->double_damage_from;
+	}
+	
+	/**
+	 * faiblesse
+	 * @param array $double_damage_from faiblesse
+	 * @return self
+	 */
+	public function setDouble_damage_from($double_damage_from): self {
+		$this->double_damage_from = $double_damage_from;
+		return $this;
+	}
+
+	/**
+	 * faiblesse
+	 * @return array
+	 */
+	public function getDouble_damage_to() {
+		return $this->double_damage_to;
+	}
+	
+	/**
+	 * faiblesse
+	 * @param array $double_damage_to faiblesse
+	 * @return self
+	 */
+	public function setDouble_damage_to($double_damage_to): self {
+		$this->double_damage_to = $double_damage_to;
+		return $this;
+	}
+
+	/**
+	 * PV max du Pokémon
+	 * @return int
+	 */
+	public function getHpmax() {
+		return $this->hpmax;
+	}
+	
+	/**
+	 * PV max du Pokémon
+	 * @param int $hpmax PV max du Pokémon
+	 * @return self
+	 */
+	public function setHpmax($hpmax): self {
+		$this->hpmax = $hpmax;
+		return $this;
+	}
+
+	/**
+	 * img du pokemon
+	 * @return string
+	 */
+	public function getImg() {
+		return $this->img;
+	}
+	
+	/**
+	 * img du pokemon
+	 * @param string $img img du pokemon
+	 * @return self
+	 */
+	public function setImg($img): self {
+		$this->img = $img;
 		return $this;
 	}
 }
