@@ -8,26 +8,9 @@ function request(string $url)
     return json_decode($response->getBody());
 }
 
-
-function get_pokemon_list() {
-    $max_offset = 24;
-    $offset = 0 ;
-    $result = request('https://pokeapi.co/api/v2/pokemon?offset=0&limit=24');
-
-    $pokemons =  $result->{'results'};
-    foreach($pokemons as $pokemon) {
-
-        $id = request('https://pokeapi.co/api/v2/pokemon/'.$pokemon->{'name'})->{'id'};
-        $name = $pokemon->{'name'};
-        ?> <div class="card ">
-            <img alt='<?= $name ?>' src="<?= get_Sprites($id,'front') ?>">
-            <p alt='<?= $id ?>'><?= translate_name_pokemon($name) ?></p>
-        </div> <?php 
-    }
-    ?><a href="<?php if ($offset > 6){$offset = $offset - 6; }  ?>"><button>Précedent</button></a>
-    <a href="<?php if ($offset < $max_offset){$offset += 6 ;} else {$offset = 6;}?>"><button>Suivant</button></a><?php
-};
-
+/** Les function offset permets de gére la pagination de la liste
+ * @return int $offset
+ */
 function offset() {
     if(!isset($_GET['offset'])) {
         $offset = 0;
@@ -40,7 +23,7 @@ function offset() {
 
 function offset_next($offset) {
     $offset_next = $offset;
-    if ($offset > 18) {
+    if ($offset >= 18) {
         $offset_next = 0;
     }
     else {
@@ -52,7 +35,7 @@ function offset_next($offset) {
 function offset_previous($offset) {
     $offset_previous = $offset;
     if ($offset < 6) {
-        $offset = 0;
+        $offset_previous = 0;
     }
     else {
         $offset_previous = $offset - 6;
@@ -90,12 +73,11 @@ function get_pokemon_stat(string $id)
 
     $damage_relations = request($parsed_json->{'types'}[0]->{'type'}->{'url'})->{'damage_relations'} ;
     $double_damage_from = $damage_relations->{'double_damage_from'};
-    $double_damage_to = $damage_relations->{'double_damage_to'};
     $table_from = [];
     foreach ($double_damage_from as $key => $relation) {$table_from += [$key => $relation->{'name'}];}
     $table = [
     'id' =>  (int)$id,
-    'name' => $parsed_json->{'name'},
+    'name' => translate_name_pokemon($parsed_json->{'name'}),
     'element_primary' => $parsed_json->{'types'}[0]->{'type'}->{'name'},
     'pv' => $parsed_json->{'stats'}[0]->{'base_stat'},
     'attack' => $parsed_json->{'stats'}[1]->{'base_stat'},
