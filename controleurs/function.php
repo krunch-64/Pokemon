@@ -37,6 +37,9 @@ function get_Sprites (string $id,$frame)
     
 }
 
+/*
+    Si tu peux reprendre juste l'url de l'image comme ca je la stocke dans ma base de donnée
+*/
 
 /** la fonction get_pokemon_stat permet de récupré les stats néssésaire pour crée une class pokemon
  * @param string $id

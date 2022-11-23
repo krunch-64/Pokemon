@@ -73,6 +73,12 @@ class Pokemon
 	 */
 	protected $double_damage_to;
 
+	/**
+	 * img du pokemon
+	 * @var string
+	 */
+	protected $img;
+
     /**
      * Contruct de la classe Pokémon
 	 * @param int $id
@@ -80,8 +86,13 @@ class Pokemon
      * @param string $element
      * @param string $element2
      * @param int $hp
+	 * @param int $damage
+	 * @param int $defense
+	 * @param array $double_damage_from
+	 * @param array $double_damage_to
+	 * @param string $img
      */
-    public function __construct(int $id, string $name, string $element, string $element2, int $hp, int $damage, int $defense, array $double_damage_from, array $double_damage_to)
+    public function __construct(int $id, string $name, string $element, string $element2, int $hp, int $damage, int $defense, array $double_damage_from, array $double_damage_to, string $img)
     {
 		$this->id = $id;
         $this->name = $name;
@@ -92,7 +103,9 @@ class Pokemon
         $this->defense = $defense;
 		$this->double_damage_from = $double_damage_from;
 		$this->double_damage_to = $double_damage_to;
-    }
+		$this->img = $img;
+	}
+
 
 	 /**
      * degat subit par le pokemon
@@ -354,6 +367,24 @@ class Pokemon
 	 */
 	public function setHpmax($hpmax): self {
 		$this->hpmax = $hpmax;
+		return $this;
+	}
+
+	/**
+	 * img du pokemon
+	 * @return string
+	 */
+	public function getImg() {
+		return $this->img;
+	}
+	
+	/**
+	 * img du pokemon
+	 * @param string $img img du pokemon
+	 * @return self
+	 */
+	public function setImg($img): self {
+		$this->img = $img;
 		return $this;
 	}
 }
