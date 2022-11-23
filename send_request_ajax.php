@@ -5,15 +5,28 @@
 
     $dao = new DAO();
 
+    $list_id = list_checkbox();
+
+    function list_checkbox () 
+    {
+        $table = array();
+
+        for ($i=0 ; $i < 24 ; $i++) {
+            if (isset($_POST[$i])) {
+                array_push($table, $i);
+            }
+            
+        }
+        return $table;
+    }
+
     // récupération du tableau des Pokemon
-    $tablePokemonUser = $dao->getListePokemonUser();
+    $tablePokemonUser = $dao->getListePokemonUser($list_id);
     $tablePokemonComputer = $dao->getListePokemonComputer();
 
     // fermeture de la connexion à MySQL
     unset($dao);
 
-    $u = 0;
-    $c = 0;
 
     if (isset($_GET['fight_action']))
 
@@ -21,29 +34,29 @@
         if ($_GET['fight_action'] == 'attack1')
 
         {
-            while($tablePokemonUser[$u]->getHp() > 0 && $tablePokemonComputer[$c]->getHp() > 0)
+            while($tablePokemonUser[$_SESSION['pkmn1_increment']]->getHp() > 0 && $tablePokemonComputer[$_SESSION['pkmn2_increment']]->getHp() > 0)
             {    
-                if($tablePokemonUser[$u]->getHp() <= 0)
+                if($tablePokemonUser[$_SESSION['pkmn1_increment']]->getHp() <= 0)
                 {
-                    $u++;
+                    $_SESSION['pkmn1_increment']++;
                 }
                 else
                 {
-                    $previous_health_PKMN1 = $tablePokemonUser[$u]->getHp();
+                    $previous_health_PKMN1 = $tablePokemonUser[$_SESSION['pkmn1_increment']]->getHp();
 
-                    $previous_health_PKMN2 = $tablePokemonComputer[$c]->getHp();
+                    $previous_health_PKMN2 = $tablePokemonComputer[$_SESSION['pkmn2_increment']]->getHp();
 
 
                     
 
-                    $tablePokemonUser[$u]->attacked($tablePokemonComputer[$c]->getDamage(), $tablePokemonComputer[$c]->getElement());
+                    $tablePokemonUser[$_SESSION['pkmn1_increment']]->attacked($tablePokemonComputer[$_SESSION['pkmn2_increment']]->getDamage(), $tablePokemonComputer[$_SESSION['pkmn2_increment']]->getElement());
 
-                    $tablePokemonComputer[$c]->attacked($tablePokemonUser[$u]->getDamage(), $tablePokemonUser[$u]->getElement());
+                    $tablePokemonComputer[$_SESSION['pkmn2_increment']]->attacked($tablePokemonUser[$_SESSION['pkmn1_increment']]->getDamage(), $tablePokemonUser[$_SESSION['pkmn1_increment']]->getElement());
 
 
-                    $new_health_PKMN1 = $tablePokemonUser[$u]->getHp();
+                    $new_health_PKMN1 = $tablePokemonUser[$_SESSION['pkmn1_increment']]->getHp();
 
-                    $new_health_PKMN2 = $tablePokemonComputer[$c]->getHp();
+                    $new_health_PKMN2 = $tablePokemonComputer[$_SESSION['pkmn2_increment']]->getHp();
 
         
                     
@@ -64,13 +77,13 @@
         if ($_GET['fight_action'] == 'pkmn1')
 
         {
-            $_SESSION['pkmn1_increment'] = 1;
+            // $_SESSION['pkmn1_increment'] = 1;
         }
 
         if ($_GET['fight_action'] == 'pkmn2')
 
         {
-            $_SESSION['pkmn1_increment'] = 2;
+            // $_SESSION['pkmn1_increment'] = 2;
         }
     }
 ?>

@@ -7,7 +7,7 @@
     $dao = new DAO();
 
     // récupération du tableau des Pokemon
-    $tablePokemonUser = $dao->getListePokemonUser();
+    $tablePokemonUser = $dao->getListePokemonUser($list_id);
     $tablePokemonComputer = $dao->getListePokemonComputer();
     
     // fermeture de la connexion à MySQL
