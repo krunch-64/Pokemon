@@ -16,14 +16,16 @@
 <body id="accueil">
     <div class="acueil_all">
         <div class="block">
-            <a href="./index.php?Accueil"><img src="/assets/img/logo.png" alt=""></a>
+            <a href="./index.php">
+                <img src="./assets/img/logo.png" alt="">
+            </a>
             <h4>Choisissez 3 pokémons :</h4>
             <div class="liste">
                 <?php
                     for ($i=0; $i < count($tablePokemon); $i++)
                     {
                         echo $tablePokemon[$i]->getName() . "<br/>";
-                        echo $tablePokemon[$i]->getImg();
+                        echo '<img src="'.$tablePokemon[$i]->getImg_front() .'"/>';
                     }
                 ?>
             </div>        
