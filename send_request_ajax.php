@@ -64,13 +64,13 @@
         if ($_GET['fight_action'] == 'pkmn1')
 
         {
-            echo 'g';
+            $_SESSION['pkmn1_increment'] = 1;
         }
 
         if ($_GET['fight_action'] == 'pkmn2')
 
         {
-            echo 'ee';
+            $_SESSION['pkmn1_increment'] = 2;
         }
     }
 ?>

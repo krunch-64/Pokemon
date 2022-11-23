@@ -27,7 +27,7 @@
                                 for ($i=0; $i < count($tableJoueur); $i++)
                                 {
                                     ?>
-                                    <tr> <td><?=$tableJoueur->getDate()?></td> <td><?= $tableJoueur->getScore() ?></td> <td><?= $tableJoueur->getNameJoueur() ?></td> </tr>
+                                    <tr> <td><?=$tableJoueur[$i]->getDate()?></td> <td><?= $tableJoueur[$i]->getScore() ?>-1</td> <td><?= $tableJoueur[$i]->getNameJoueur() ?></td> </tr>
                                     <?php
                                 }
                                 ?>

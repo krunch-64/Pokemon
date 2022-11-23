@@ -16,11 +16,24 @@
         if ($_SESSION['pkmn1_health'] <= 0)
             
         {
-            $_SESSION['pkmn1_increment'] += 1;
+
+            if($_SESSION['pkmn1_increment'] >= 3)
+            {
+                header('Location: index.php');
+            }
+            else
+            {
+                $_SESSION['pkmn1_increment'] += 1;
         
-            $_SESSION['pkmn1_health'] += $tablePokemonUser[$_SESSION['pkmn1_increment']]->getHp();
-            $_SESSION['pkmn1_img_front']= $tablePokemonUser[$_SESSION['pkmn1_increment']]->getImg_front();
-            $_SESSION['pkmn1_img_back']= $tablePokemonUser[$_SESSION['pkmn1_increment']]->getImg_back();
+                $_SESSION['pkmn1_name'] = $tablePokemonUser[$_SESSION['pkmn1_increment']]->getName();
+                $_SESSION['pkmn1_health'] = $tablePokemonUser[$_SESSION['pkmn1_increment']]->getHp();
+                $_SESSION['pkmn1_health_base'] = $tablePokemonUser[$_SESSION['pkmn1_increment']]->getHp();
+                $_SESSION['pkmn1_img_front']= $tablePokemonUser[$_SESSION['pkmn1_increment']]->getImg_front();
+                $_SESSION['pkmn1_img_back']= $tablePokemonUser[$_SESSION['pkmn1_increment']]->getImg_back();
+            }
+            
+
+            
             
         }
         if ($_SESSION['pkmn2_health'] <= 0)
@@ -28,7 +41,10 @@
         {
             $_SESSION['pkmn2_increment'] += 1;
         
-            $_SESSION['pkmn2_health'] += $tablePokemonUser[$_SESSION['pkmn2_increment']]->getHp();
+            
+            $_SESSION['pkmn2_name'] = $tablePokemonComputer[$_SESSION['pkmn2_increment']]->getName();
+            $_SESSION['pkmn2_health'] = $tablePokemonUser[$_SESSION['pkmn2_increment']]->getHp();
+            $_SESSION['pkmn2_health_base'] = $tablePokemonUser[$_SESSION['pkmn2_increment']]->getHp();
             $_SESSION['pkmn2_img_front']= $tablePokemonComputer[$_SESSION['pkmn2_increment']]->getImg_front();
             $_SESSION['pkmn2_img_back']= $tablePokemonComputer[$_SESSION['pkmn2_increment']]->getImg_back();
             
