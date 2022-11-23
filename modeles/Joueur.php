@@ -40,13 +40,12 @@ trait Joueur
      * @param string $date
 	 * @param array $pokemon_user
      */
-    public function __construct(int $idJoueur, string $nameJoueur, int $score, string $date,array $pokemon_user)
+    public function __construct(int $idJoueur, string $nameJoueur, int $score, string $date)
     {
         $this->idJoueur = $idJoueur;
         $this->nameJoueur = $nameJoueur;
         $this->score = $score;
         $this->date = $date;
-		$this->pokemon_user = $pokemon_user;
     }
 
     
