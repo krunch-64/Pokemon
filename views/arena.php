@@ -17,8 +17,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     
-    <link rel="stylesheet" href="./assets/css/reset.css">
-    <link rel="stylesheet" href="./assets/css/output.css">
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../assets/css/output.css">
+    <link rel="stylesheet" href="/assets/css/output.css">
 </head>
 <body id="arena">
     <div class="fight_window">
@@ -30,26 +31,25 @@
                 </div>
                 <div class="fight_window__player_space2__infos__ground">
                     <div id="pokemon2" class="pokemon-div pokemon2">
-                        <img class="full-s" src="<?= $tablePokemonComputer[$c]->getImg_front()?>" alt="">
+                        <img class="full-s" src="./assets/img/25.png" alt="">
                     </div>
                 </div>
-                
             </div>
         </div>
 
         <div class="fight_window__player_space1">
             <div class="fight_window__player_space1__infos">
-
-                
                 <div class="fight_window__player_space1__infos__ground">
                     <div id="pokemon1" class="pokemon-div pokemon1">
-                        <img class="full-s" src="<?= $tablePokemonUser[$u]->getImg_back()?>" alt="">
+                        <img class="full-s" src="./assets/img/384.png" alt="">
                     </div>
-                </div>
-                <div id="toAddPKMN1" class="fight_window__player_space1__infos__stats stats-hp-100">
+                    </div>
+                    <div id="toAddPKMN1" class="fight_window__player_space1__infos__stats stats-hp-100">
                     
                     
                 </div>
+                
+                
             </div>
         </div>
 
@@ -71,7 +71,7 @@
                 <button class="attacks_window__content__btn btn" id="btn-back2">Retour</button>
             </div>
             <div id="menu-arena-4" class="d-none">
-                <button class="attacks_window__content__btn btn">Oui</button>
+                <a href="../index.php"><button class="attacks_window__content__btn btn">Oui</button></a>
 
                 <button class="attacks_window__content__btn btn" id="btn-back3">Retour</button>
             </div>
@@ -85,5 +85,5 @@
 
     
 </body>
-<script src="./assets/js/script.js"></script>
+<script src="../assets/js/script.js"></script>
 </html>
