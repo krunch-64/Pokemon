@@ -40,7 +40,7 @@ function offset() {
 
 function offset_next($offset) {
     $offset_next = $offset;
-    if ($offset >= 24) {
+    if ($offset > 18) {
         $offset_next = 0;
     }
     else {
