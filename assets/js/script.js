@@ -134,16 +134,33 @@ setInterval(function () {
     xhttp.onload = function() {
         document.querySelector('#toAddPKMN1').innerHTML = this.responseText;
     };
-    xhttp.open("GET", "stats-pkmn1.php", true);
+    xhttp.open("GET", "../stats-pkmn1.php", true);
     xhttp.send();
-}, 100);
 
-setInterval(function () {
     var xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
         document.querySelector('#toAddPKMN2').innerHTML = this.responseText;
     };
-    xhttp.open("GET", "stats-pkmn2.php", true);
+    xhttp.open("GET", "../stats-pkmn2.php", true);
     xhttp.send();
+
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+        document.querySelector('#pokemon1').innerHTML = this.responseText;
+    };
+    xhttp.open("GET", "../pkmn1.php", true);
+    xhttp.send();
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+        document.querySelector('#pokemon2').innerHTML = this.responseText;
+    };
+    xhttp.open("GET", "../pkmn2.php", true);
+    xhttp.send();
+
+
+
 }, 100);
+
 
