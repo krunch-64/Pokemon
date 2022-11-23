@@ -2,13 +2,13 @@
     // include './controleurs/function.php';
     
     include_once ('./modeles/DAO.php');
-
+    include_once('./views/liste.php');
+    
     $dao = new DAO();
 
     // récupération du tableau des Pokemon
     $tablePokemon = $dao->getListePokemon();
 
-    // var_dump($tablePokemon);
 
 
 /*
@@ -30,5 +30,8 @@ function get_pokemon_list() {
     ?><a href="<?php if ($offset >= 6){$offset = $offset - 6; }  ?>"><button>Précedent</button></a>
     <a href="<?php if ($offset < $max_offset){$offset += 6 ;} else {$offset = 6;}?>"><button>Suivant</button></a><?php
 };*/
-include_once('./views/liste.php');
+
+
+
+
 ?>

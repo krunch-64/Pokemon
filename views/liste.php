@@ -1,5 +1,6 @@
 <?php 
-    include 'controleurs/CtrlList.php';
+    include_once './controleurs/function.php';
+    include './controleurs/CtrlList.php';
 ?>
 
 <!DOCTYPE html>
@@ -21,14 +22,16 @@
             </a>
             <h4>Choisissez 3 pokémons :</h4>
             <div class="liste">
-                <?php
-                    for ($i=0; $i < count($tablePokemon); $i++)
-                    {
-                        echo $tablePokemon[$i]->getName() . "<br/>";
-                        echo '<img src="'.$tablePokemon[$i]->getImg_front() .'"/>';
-                    }
-                ?>
-            </div>        
+                <?php for ($i=offset(); $i < 6; $i++) : ?>
+                    <div class="card">
+                        <img class="img-list" src="<?= $tablePokemon[$i]->getImg_front(); ?>"/>
+                        <p class="text-list"><?= $tablePokemon[$i]->getName() ?></p>
+                    </div>
+
+                    <?php endfor; ?>
+            </div>
+            <a href="index.php?action=list&amp;offset=<?= offset_previous(offset());  ?>"><button>Précedent</button></a>
+            <a href="index.php?action=list&amp;offset=<?= offset_next(offset()); ?>"><button>Suivant</button></a>        
         </div>
     </div>
 </body>

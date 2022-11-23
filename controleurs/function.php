@@ -28,6 +28,41 @@ function get_pokemon_list() {
     <a href="<?php if ($offset < $max_offset){$offset += 6 ;} else {$offset = 6;}?>"><button>Suivant</button></a><?php
 };
 
+function offset() {
+    if(!isset($_GET['offset'])) {
+        $offset = 0;
+    }
+    else {
+        $offset = $_GET['offset'];
+    }
+    return $offset;
+}
+
+function offset_next($offset) {
+    $offset_next = $offset;
+    if ($offset >= 24) {
+        $offset_next = 0;
+    }
+    else {
+        $offset_next = $offset + 6;
+    }
+    return $offset_next;
+}
+
+function offset_previous($offset) {
+    $offset_previous = $offset;
+    if ($offset < 6) {
+        $offset = 0;
+    }
+    else {
+        $offset_previous = $offset - 6;
+    }
+    return $offset_previous;
+}
+
+
+
+
 /** La fonction get_front_sprites permet de récupré la front sprites d'un pokemon
  * @param string $id d'un pokemon
  * @param string $frame 'front' ou 'back' 
