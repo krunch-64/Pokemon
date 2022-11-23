@@ -37,6 +37,12 @@ class Pokemon
      */
     protected $hp;
 
+	/**
+	 * PV max du Pokémon
+	 * @var int
+	 */
+	protected $hpmax;
+
     /**
      * Attaque du Pokémon
      * @var int
@@ -107,7 +113,7 @@ class Pokemon
 
         if($this->getDefense() > 0)
         {
-            $this->setDefense($this->getDefense() - 10);
+            $this->setDefense($this->getDefense() - ($this->getDefense()*0.10));
             $this->setDamagesSuffered($degat - $this->getDefense());
         }
         else
@@ -141,6 +147,16 @@ class Pokemon
 
     //     return $this->getDamage();
     // }
+
+	// /**
+	//  * augmenter les pv quand il est sur le banc
+	//  * @return self
+	//  */
+	// public function addpv(): self
+	// {
+	// 	$this->setHp($this->getHp()+($this->getHp()*0.10));
+	// 	return $this;
+	// }
 
 	// GETTER ET SETTER
 	/**
@@ -320,6 +336,24 @@ class Pokemon
 	 */
 	public function setDouble_damage_to($double_damage_to): self {
 		$this->double_damage_to = $double_damage_to;
+		return $this;
+	}
+
+	/**
+	 * PV max du Pokémon
+	 * @return int
+	 */
+	public function getHpmax() {
+		return $this->hpmax;
+	}
+	
+	/**
+	 * PV max du Pokémon
+	 * @param int $hpmax PV max du Pokémon
+	 * @return self
+	 */
+	public function setHpmax($hpmax): self {
+		$this->hpmax = $hpmax;
 		return $this;
 	}
 }

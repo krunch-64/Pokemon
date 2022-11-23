@@ -7,7 +7,8 @@
     $dao = new DAO();
 
     // récupération du tableau des Pokemon
-    $tablePokemon = $dao->getListePokemon();
+    $tablePokemonUser = $dao->getListePokemonUser();
+    $tablePokemonComputer = $dao->getListePokemonComputer();
     
     // fermeture de la connexion à MySQL
     unset($dao);
@@ -17,34 +18,68 @@
 
     // for ($i=0; $i < count($tablePokemon); $i++)
     // {
-        echo "<hr>". $tablePokemon[0]->getName() . "<br/>";
+    //      echo "<hr>". $tablePokemon[0]->getName() . "<br/>";
     // }
-    echo "faiblesse: ". json_encode($tablePokemon[0]->getDouble_damage_from()) ."<br>";
-    echo "defense: ".$tablePokemon[0]->getDefense() ."<br>";
-    echo "pv: ".$tablePokemon[0]->getHp() ."<br>";
 
-    // $element = $tablePokemon[3]->getElement();
-    // $degat = $tablePokemon[3]->getDamage();
+    echo $tablePokemonUser[0]->getName() ."<br>";
+    echo $tablePokemonUser[1]->getName()."<br>";
+    echo $tablePokemonUser[2]->getName();
 
-    // for($n=0; $n<count($tablePokemon[0]->getDouble_damage_from()); $n++)
+    $u = 0;
+    $c = 0;
+    // for($i = 0; $i<4; $i++)
     // {
-    //     if('"'.$element.'"' == json_encode($tablePokemon[0]->getDouble_damage_from()[$n]))
-    //     {
-    //         $degat = $degat * 2;
-    //         echo $degat ."<br>";
-    //         break;
-    //     }
-    //     echo $degat."<br>";
+       while($tablePokemonUser[$u]->getHp() > 0 && $tablePokemonComputer[$c]->getHp() > 0)
+        {       
+            echo '<hr>combat:';
+            echo "<hr>". $tablePokemonUser[$u]->getName() . "<br>";
+            echo "faiblesse: ". json_encode($tablePokemonUser[$u]->getDouble_damage_from()) ."<br>";
+            echo "defense: ".$tablePokemonUser[$u]->getDefense() ."<br>";
+            echo "pv: ".$tablePokemonUser[$u]->getHp() ."<br>";
+            
+            echo "<hr>attaque: ".$tablePokemonUser[$u]->getDamage() ."<br>";
+            echo "element: ". $tablePokemonUser[$u]->getElement();
+
+            echo "<hr>". $tablePokemonComputer[$c]->getName() . "<br>";
+            echo "faiblesse: ". json_encode($tablePokemonComputer[$c]->getDouble_damage_from()) ."<br>";
+            echo "defense: ".$tablePokemonComputer[$c]->getDefense() ."<br>";
+            echo "pv: ".$tablePokemonComputer[$c]->getHp() ."<br>";
+            
+            echo "<hr>attaque: ".$tablePokemonComputer[$c]->getDamage() ."<br>";
+            echo "element: ". $tablePokemonComputer[$c]->getElement();
+
+
+            $tablePokemonUser[$u]->attacked($tablePokemonComputer[$c]->getDamage(), $tablePokemonComputer[$c]->getElement());
+
+            $tablePokemonComputer[$c]->attacked($tablePokemonUser[$u]->getDamage(), $tablePokemonUser[$u]->getElement());
+
+            if($tablePokemonUser[$u]->getHp() <= 0 )
+            {
+                echo "<hr>". $tablePokemonUser[$u]->getName() ." n'a plus de vie <br>";
+                echo "degat: ".$tablePokemonComputer[$u]->getDamage() *2 ."<br>";
+                echo "degat reel: ".$tablePokemonUser[$u]->getDamagesSuffered() ."<br>";
+                echo "defense: ".$tablePokemonUser[$u]->getDefense() ."<br>";
+                echo "pv: ".$tablePokemonUser[$u]->getHp();
+                $u++;
+            }
+            else
+            {
+                if($tablePokemonComputer[$c]->getHp() <= 0 )
+                {
+                    echo "<hr>". $tablePokemonComputer[$c]->getName() ." n'a plus de vie";
+                    $c++;
+                }
+
+                echo "<hr>".$tablePokemonComputer[$c]->getName() ."<br>";
+                echo "degat: ".$tablePokemonUser[$c]->getDamage() ."<br>";
+                echo "degat reel: ".$tablePokemonComputer[$c]->getDamagesSuffered() ."<br>";
+                echo "defense: ".$tablePokemonComputer[$c]->getDefense() ."<br>";
+                echo "pv: ".$tablePokemonComputer[$c]->getHp() ."<br>";
+            }
+            
+        } 
     // }
-
-    // echo $tablePokemon[3]->getName() . "<br/>";
-
-    $tablePokemon[0]->attacked($tablePokemon[3]->getDamage(), $tablePokemon[3]->getElement());
-
-    echo "<hr>attaque: ".$tablePokemon[3]->getDamage() ."<br>";
-    echo "element: ". $tablePokemon[3]->getElement();
-
-    echo "<hr> degat reel: ".$tablePokemon[0]->getDamagesSuffered() ."<br>";
-    echo "defense: ".$tablePokemon[0]->getDefense() ."<br>";
-    echo "pv: ".$tablePokemon[0]->getHp() ."<br>";
+    
+    
+    
 ?>
