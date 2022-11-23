@@ -6,11 +6,11 @@
     $dao = new DAO();
 
     // récupération du tableau des Pokemon
-    $tablePokemon = $dao->getListePokemon();
+    $tablePokemon = $dao->get_pokemon_list();
 
 
 
-/*
+
 function get_pokemon_list() {
     $max_offset = 24;
     $offset = 0;
@@ -26,8 +26,8 @@ function get_pokemon_list() {
             <p alt='<?= $id ?>'><?= translate_name_pokemon($name) ?></p>
         </div> <?php
     }
-    ?><a href="<?php if ($offset > 6){$offset = $offset - 6; }  ?>"><button>Précedent</button></a>
+    ?><a href="<?php if ($offset >= 6){$offset = $offset - 6; }  ?>"><button>Précedent</button></a>
     <a href="<?php if ($offset < $max_offset){$offset += 6 ;} else {$offset = 6;}?>"><button>Suivant</button></a><?php
-};*/
+};
 include_once('./views/liste.php');
 ?>
