@@ -26,7 +26,7 @@
     echo $tablePokemonUser[2]->getName();
     echo "<img src='".$tablePokemonUser[0]->getImg()."' />";
 
-    /*$u = 0;
+    $u = 0;
     $c = 0;
     // for($i = 0; $i<4; $i++)
     // {
@@ -80,7 +80,7 @@
             
         } 
     // }
-    */
+    
     
     
     

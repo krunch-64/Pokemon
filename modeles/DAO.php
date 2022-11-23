@@ -55,31 +55,23 @@ class DAO
     // Créer un nouveau pokémon
     public function insertPokemon($tablePokemon)
     {
-        $null = 'NULL';
-
-        $txt_req = "INSERT INTO `pokemon` (pokemon_id, pokemon_name, pokemon_element, pokemon_element2, pokemon_hp, pokemon_attack, pokemon_defense, pokemon_damage_from, pokemon_damage_to)";
-        $txt_req .= "VALUES (:pokemon_id, :pokemon_name, :pokemon_element, :pokemon_element2, :pokemon_hp, :pokemon_attack, :pokemon_defense, :pokemon_damage_from, :pokemon_damage_to)";
+        // requete qui sera envoyé
+        $txt_req = "INSERT INTO `pokemon` (pokemon_id, pokemon_name, pokemon_element, pokemon_hp, pokemon_attack, pokemon_defense, pokemon_damage_from, pokemon_img_front, pokemon_img_back)";
+        $txt_req .= "VALUES (:pokemon_id, :pokemon_name, :pokemon_element, :pokemon_hp, :pokemon_attack, :pokemon_defense, :pokemon_damage_from, :pokemon_img_front, :pokemon_img_back)";
 
         $stmt = $this->cnx->prepare($txt_req);
 
         $stmt->bindParam(':pokemon_id', $tablePokemon["id"]);
         $stmt->bindParam(':pokemon_name', $tablePokemon["name"]);
         $stmt->bindParam(':pokemon_element', $tablePokemon["element_primary"]);
-        if($tablePokemon["element_secondary"] != NULL)
-        {
-            $stmt->bindParam(':pokemon_element2', $tablePokemon["element_secondary"]);
-        }
-        else
-        {
-            $stmt->bindParam(':pokemon_element2', $null);
-        }
         $stmt->bindParam(':pokemon_hp', $tablePokemon["pv"]);
         $stmt->bindParam(':pokemon_attack', $tablePokemon["attack"]);
         $stmt->bindParam(':pokemon_defense', $tablePokemon["defense"]);
         $tablePokemon["double_damage_from"] = json_encode($tablePokemon["double_damage_from"]);
-        $tablePokemon["double_damage_to"] = json_encode($tablePokemon["double_damage_to"]);
         $stmt->bindParam(':pokemon_damage_from', $tablePokemon["double_damage_from"]);
-        $stmt->bindParam(':pokemon_damage_to', $tablePokemon["double_damage_to"]);
+        $stmt->bindParam(':pokemon_img_front', $tablePokemon['pokemon_img_front']);
+        $stmt->bindParam(':pokemon_img_back', $tablePokemon['pokemon_img_back']);
+
 
         var_dump($stmt);
         $stmt->execute();
@@ -104,6 +96,11 @@ class DAO
         $stmt->execute();
         return $stmt->rowCount();
         
+    }
+
+    public function getListePokemon()
+    {
+
     }
 
     // retourne la liste des Pokemons de l'utilisateur sous forme de tableau d'objets
