@@ -7,4 +7,4 @@ $PARAM_HOTE = "localhost";		// si le sgbd est sur la même machine que le serveu
 $PARAM_PORT = "3306";			// le port utilisé par défaut par le serveur MySql
 $PARAM_BDD = "appli_pokemon";		    // nom de la base de données
 $PARAM_USER = "root";		// nom de l'utilisateur (à créer)
-$PARAM_PWD = "Yanis.2003";		// son mot de passe
+$PARAM_PWD = "";		// son mot de passe

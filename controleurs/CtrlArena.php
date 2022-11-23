@@ -1,5 +1,6 @@
 <?php 
     session_start();
+    // print_r($_SESSION);
     // connexion du serveur web à la base MySQL
     include_once ('./modeles/DAO.php');
 
