@@ -72,7 +72,7 @@ btnAttack1.addEventListener("click", function () {
     xhttp.onload = function() {
         document.querySelector('#test').innerHTML = this.responseText;
     };
-    xhttp.open("GET", "send_request_ajax.php?action=attack1", true);
+    xhttp.open("GET", "send_request_ajax.php?fight_action=attack1", true);
     xhttp.send();
 
     
@@ -96,7 +96,7 @@ btnPkmn1.addEventListener("click", function () {
     xhttp.onload = function() {
         document.querySelector('#test').innerHTML = this.responseText;
     };
-    xhttp.open("GET", "send_request_ajax.php?action=pkmn1", true);
+    xhttp.open("GET", "send_request_ajax.php?fight_action=pkmn1", true);
     xhttp.send();
 }); 
 
@@ -111,7 +111,7 @@ btnPkmn2.addEventListener("click", function () {
     xhttp.onload = function() {
         document.querySelector('#test').innerHTML = this.responseText;
     };
-    xhttp.open("GET", "send_request_ajax.php?action=pkmn2", true);
+    xhttp.open("GET", "send_request_ajax.php?fight_action=pkmn2", true);
     xhttp.send();
 }); 
 
