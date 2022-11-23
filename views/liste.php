@@ -25,15 +25,15 @@
             <div class="liste">
                 <?php list_offset(offset(),$tablePokemon);?>
             </div>
-            <div class="buttons">
-                <a href="./index.php?action=arena"><button class="btn-liste attacks_window__content__btn btn">Lancer le combat</button></a>
-            </div>
-            
+
             <div class="buttons">
                 <a href="index.php?action=list&amp;offset=<?= offset_previous(offset());  ?>"><button>Précedent</button></a>
                 <a href="index.php?action=list&amp;offset=<?= offset_next(offset()); ?>"><button>Suivant</button></a>
             </div>
-                    
+
+            <div class="buttons">
+                <a href="./index.php?action=arena"><button class="btn-liste attacks_window__content__btn btn">Lancer le combat</button></a>
+            </div>         
         </div>
        
     </div>
