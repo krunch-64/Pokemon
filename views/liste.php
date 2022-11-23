@@ -37,6 +37,21 @@
 </html>
 
 <?php 
+function list_checkbox () 
+{
+    $table = [];
+
+    for ($i=0 ; $i < 24 ; $i++) {
+        if (isset($_POST[$i])) {
+            $table += [$i];
+            return $table;
+        }
+        
+    }
+    var_dump($table);
+    
+}
+
 function list_offset($tablePokemon) 
 {
     ?><?php for ($i = 2 ; $i < 18; $i = $i+3) : ?>
@@ -49,22 +64,7 @@ function list_offset($tablePokemon)
     <?php endfor; ?><?php
 }
 
-//$user = new Joueur(1,'user',0,'23/11',[]);
 
-$list_id = list_checkbox();
 
-function list_checkbox () 
-{
-    $table = [];
 
-    for ($i=0 ; $i < 24 ; $i++) {
-        if (isset($_POST[$i])) {
-            $table += [$i];
-            return $table;
-        }
-        
-    }
-}
-
-//echo $user->getPokemon_user();
 
