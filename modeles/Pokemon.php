@@ -26,12 +26,6 @@ class Pokemon
     protected $element;
 
     /**
-     * Second élèment du Pokémon
-     * @var string
-     */
-    protected $element2;
-
-    /**
      * PV du Pokémon
      * @var int
      */
@@ -68,42 +62,39 @@ class Pokemon
 	protected $double_damage_from;
 
 	/**
-	 * faiblesse
-	 * @var array
-	 */
-	protected $double_damage_to;
-
-	/**
-	 * img du pokemon
+	 * img du pokemon de face
 	 * @var string
 	 */
-	protected $img;
+	protected $img_front;
+
+	/**
+	 * img du pokemon de dos
+	 * @var string
+	 */
+	protected $img_back;
 
     /**
      * Contruct de la classe Pokémon
 	 * @param int $id
      * @param string $name
      * @param string $element
-     * @param string $element2
      * @param int $hp
 	 * @param int $damage
 	 * @param int $defense
 	 * @param array $double_damage_from
-	 * @param array $double_damage_to
-	 * @param string $img
+	 * @param string $img_front
      */
-    public function __construct(int $id, string $name, string $element, string $element2, int $hp, int $damage, int $defense, array $double_damage_from, array $double_damage_to, string $img)
+    public function __construct(int $id, string $name, string $element, int $hp, int $damage, int $defense, array $double_damage_from, string $img_front, string $img_back)
     {
 		$this->id = $id;
         $this->name = $name;
         $this->element = $element;
-        $this->element2 = $element2;
         $this->hp = $hp;
         $this->damage = $damage;
         $this->defense = $defense;
 		$this->double_damage_from = $double_damage_from;
-		$this->double_damage_to = $double_damage_to;
-		$this->img = $img;
+		$this->img_front = $img_front;
+		$this->img_back = $img_back;
 	}
 
 
@@ -227,24 +218,6 @@ class Pokemon
 	}
 
 	/**
-	 * Second élèment du Pokémon
-	 * @return string
-	 */
-	public function getElement2() {
-		return $this->element2;
-	}
-	
-	/**
-	 * Second élèment du Pokémon
-	 * @param string $element2 Second élèment du Pokémon
-	 * @return self
-	 */
-	public function setElement2($element2): self {
-		$this->element2 = $element2;
-		return $this;
-	}
-
-	/**
 	 * PV du Pokémon
 	 * @return int
 	 */
@@ -335,24 +308,6 @@ class Pokemon
 	}
 
 	/**
-	 * faiblesse
-	 * @return array
-	 */
-	public function getDouble_damage_to() {
-		return $this->double_damage_to;
-	}
-	
-	/**
-	 * faiblesse
-	 * @param array $double_damage_to faiblesse
-	 * @return self
-	 */
-	public function setDouble_damage_to($double_damage_to): self {
-		$this->double_damage_to = $double_damage_to;
-		return $this;
-	}
-
-	/**
 	 * PV max du Pokémon
 	 * @return int
 	 */
@@ -371,20 +326,38 @@ class Pokemon
 	}
 
 	/**
-	 * img du pokemon
+	 * img du pokemon de face
 	 * @return string
 	 */
-	public function getImg() {
-		return $this->img;
+	public function getImg_front() {
+		return $this->img_front;
 	}
 	
 	/**
-	 * img du pokemon
-	 * @param string $img img du pokemon
+	 * img du pokemon de face
+	 * @param string $img_front img du pokemon de face
 	 * @return self
 	 */
-	public function setImg($img): self {
-		$this->img = $img;
+	public function setImg_front($img_front): self {
+		$this->img_front = $img_front;
+		return $this;
+	}
+
+	/**
+	 * img du pokemon de dos
+	 * @return string
+	 */
+	public function getImg_back() {
+		return $this->img_back;
+	}
+	
+	/**
+	 * img du pokemon de dos
+	 * @param string $img_back img du pokemon de dos
+	 * @return self
+	 */
+	public function setImg_back($img_back): self {
+		$this->img_back = $img_back;
 		return $this;
 	}
 }

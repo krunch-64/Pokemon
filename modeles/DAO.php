@@ -69,8 +69,8 @@ class DAO
         $stmt->bindParam(':pokemon_defense', $tablePokemon["defense"]);
         $tablePokemon["double_damage_from"] = json_encode($tablePokemon["double_damage_from"]);
         $stmt->bindParam(':pokemon_damage_from', $tablePokemon["double_damage_from"]);
-        $stmt->bindParam(':pokemon_img_front', $tablePokemon['pokemon_img_front']);
-        $stmt->bindParam(':pokemon_img_back', $tablePokemon['pokemon_img_back']);
+        $stmt->bindParam(':pokemon_img_front', $tablePokemon['image_front']);
+        $stmt->bindParam(':pokemon_img_back', $tablePokemon['image_back']);
 
 
         var_dump($stmt);
@@ -100,7 +100,46 @@ class DAO
 
     public function getListePokemon()
     {
+        // Tableau de Pokemons
+        $lesPokemons = array();
+        
+        $i = 0;
+        
+        // préparation de la requête de recherche
+        $txt_req = "Select pokemon_id, pokemon_name, pokemon_element, pokemon_hp, pokemon_attack, pokemon_defense, pokemon_damage_from, pokemon_img_front, pokemon_img_back";
+        $txt_req .= " from pokemon";
 
+        // faire juste quand le pokemon est utiliser /* where personne_id =id */
+
+        $req = $this->cnx->prepare($txt_req);
+        
+        // liaison de la requête et de ses paramètres
+        // $req->bindValue("param1", $param1, PDO::PARAM_STR);
+        
+        // extraction des données
+        $req->execute();
+        
+        
+        // traitement de la réponse
+        while ($uneLigne = $req->fetch(PDO::FETCH_OBJ))
+        {
+        
+            // création d'un objet Pokemon
+            $pokemon_id = $uneLigne->pokemon_id;
+            $pokemon_name = $uneLigne->pokemon_name;
+            $pokemon_element = $uneLigne->pokemon_element;
+            $pokemon_hp = $uneLigne->pokemon_hp;
+            $pokemon_damage = $uneLigne->pokemon_attack;
+            $pokemon_defense = $uneLigne->pokemon_defense;
+            $pokemon_damage_from = $uneLigne->pokemon_damage_from;
+            $pokemon_img_front = $uneLigne->pokemon_img_front;
+            $pokemon_img_back = $uneLigne->pokemon_img_back;
+            
+            $unPokemon = new Pokemon($pokemon_id, $pokemon_name, $pokemon_element, $pokemon_hp, $pokemon_damage, $pokemon_defense, json_decode($pokemon_damage_from), $pokemon_img_front, $pokemon_img_back);
+            $lesPokemonsUser[$i] = $unPokemon;
+            $i++;
+        }
+        return $lesPokemonsUser;
     }
 
     // retourne la liste des Pokemons de l'utilisateur sous forme de tableau d'objets
@@ -112,7 +151,7 @@ class DAO
         $i = 0;
         
         // préparation de la requête de recherche
-        $txt_req = "Select pokemon_id, pokemon_name, pokemon_element, pokemon_element2, pokemon_hp, pokemon_attack, pokemon_defense, pokemon_damage_from, pokemon_damage_to, pokemon_img";
+        $txt_req = "Select pokemon_id, pokemon_name, pokemon_element, pokemon_hp, pokemon_attack, pokemon_defense, pokemon_damage_from, pokemon_img_front, pokemon_img_back";
         $txt_req .= " from pokemon";
         $txt_req .= " WHERE pokemon_id = 1 OR pokemon_id = 2 OR pokemon_id = 3";
 
@@ -135,15 +174,14 @@ class DAO
             $pokemon_id = $uneLigne->pokemon_id;
             $pokemon_name = $uneLigne->pokemon_name;
             $pokemon_element = $uneLigne->pokemon_element;
-            $pokemon_element2 = $uneLigne->pokemon_element2;
             $pokemon_hp = $uneLigne->pokemon_hp;
             $pokemon_damage = $uneLigne->pokemon_attack;
             $pokemon_defense = $uneLigne->pokemon_defense;
             $pokemon_damage_from = $uneLigne->pokemon_damage_from;
-            $pokemon_damage_to = $uneLigne->pokemon_damage_to;
-            $pokemon_img = $uneLigne->pokemon_img;
+            $pokemon_img_front = $uneLigne->pokemon_img_front;
+            $pokemon_img_back = $uneLigne->pokemon_img_back;
              
-            $unePokemon = new Pokemon($pokemon_id, $pokemon_name, $pokemon_element, $pokemon_element2, $pokemon_hp, $pokemon_damage, $pokemon_defense, json_decode($pokemon_damage_from), json_decode($pokemon_damage_to), $pokemon_img);
+            $unePokemon = new Pokemon($pokemon_id, $pokemon_name, $pokemon_element, $pokemon_hp, $pokemon_damage, $pokemon_defense, json_decode($pokemon_damage_from), $pokemon_img_front, $pokemon_img_back);
             $lesPokemonsUser[$i] = $unePokemon;
             $i++;
         }

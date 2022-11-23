@@ -12,7 +12,9 @@
 <body id="accueil">
     <div class="acueil_all">
         <div class="block">
-            <img src="./assets/img/logo.png" alt="">
+            <a href="./index.php">
+                <img src="./assets/img/logo.png" alt="">
+            </a>
             <div class="tableau">
                 <table>
                     <tr> <th>Date</th> <th>Score</th> <th>Adversaire</th> </tr>
