@@ -116,27 +116,34 @@ btnPkmn2.addEventListener("click", function () {
 }); 
 
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
-
-
 
 setInterval(function () {
     if (controltest == 1)
     {
-
-
-
         pkmn1.classList.remove('pokemon1-attack');
         pkmn2.classList.remove('pokemon2-attack');
         menuArena1.classList.remove('d-none');
         controltest = 0
-
-        
-
-
     }
-
 }, 5000);
+
+
+
+setInterval(function () {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+        document.querySelector('#toAddPKMN1').innerHTML = this.responseText;
+    };
+    xhttp.open("GET", "stats-pkmn1.php", true);
+    xhttp.send();
+}, 100);
+
+setInterval(function () {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+        document.querySelector('#toAddPKMN2').innerHTML = this.responseText;
+    };
+    xhttp.open("GET", "stats-pkmn2.php", true);
+    xhttp.send();
+}, 100);
 
