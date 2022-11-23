@@ -15,7 +15,7 @@
         }
     }
 
-    echo get_life_for_bar ($max_life,$life);
+    // echo get_life_for_bar ($max_life,$life);
 
 
 ?>

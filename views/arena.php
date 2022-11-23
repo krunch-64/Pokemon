@@ -1,15 +1,22 @@
 <?php 
-    $_SESSION['pkmn1_name'] = $tablePokemonUser[$u]->getName();
-    $_SESSION['pkmn2_name'] = $tablePokemonComputer[$c]->getName();
+    $_SESSION['pkmn1_name'] = $tablePokemonUser[$_SESSION['pkmn1_increment']]->getName();
+    $_SESSION['pkmn2_name'] = $tablePokemonComputer[$_SESSION['pkmn2_increment']]->getName();
     
-    $_SESSION['pkmn1_img_front']= $tablePokemonUser[$u]->getImg_front();
-    $_SESSION['pkmn1_img_back']= $tablePokemonUser[$u]->getImg_back();
-    $_SESSION['pkmn2_img_front']= $tablePokemonComputer[$c]->getImg_front();
-    $_SESSION['pkmn2_img_back']= $tablePokemonComputer[$c]->getImg_back();
+    $_SESSION['pkmn1_img_front']= $tablePokemonUser[$_SESSION['pkmn1_increment']]->getImg_front();
+    $_SESSION['pkmn1_img_back']= $tablePokemonUser[$_SESSION['pkmn1_increment']]->getImg_back();
+    $_SESSION['pkmn2_img_front']= $tablePokemonComputer[$_SESSION['pkmn2_increment']]->getImg_front();
+    $_SESSION['pkmn2_img_back']= $tablePokemonComputer[$_SESSION['pkmn2_increment']]->getImg_back();
 
 
-    $_SESSION['pkmn1_health'] = $tablePokemonUser[$u]->getHp();
-    $_SESSION['pkmn2_health'] = $tablePokemonComputer[$c]->getHp();
+    $_SESSION['pkmn1_health_base'] = $tablePokemonUser[$_SESSION['pkmn1_increment']]->getHp();
+    $_SESSION['pkmn2_health_base'] = $tablePokemonComputer[$_SESSION['pkmn2_increment']]->getHp();
+
+
+    $_SESSION['pkmn1_health'] = $tablePokemonUser[$_SESSION['pkmn1_increment']]->getHp();
+    $_SESSION['pkmn2_health'] = $tablePokemonComputer[$_SESSION['pkmn2_increment']]->getHp();
+
+    $_SESSION['pkmn1_increment'] = 0;
+    $_SESSION['pkmn2_increment'] = 0;
 
 ?>
 
