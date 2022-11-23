@@ -21,31 +21,42 @@
         if ($_GET['fight_action'] == 'attack1')
 
         {
-            $previous_health_PKMN1 = $tablePokemonUser[$u]->getHp();
+            while($tablePokemonUser[$u]->getHp() > 0 && $tablePokemonComputer[$c]->getHp() > 0)
+            {    
+                if($tablePokemonUser[$u]->getHp() <= 0)
+                {
+                    $u++;
+                }
+                else
+                {
+                    $previous_health_PKMN1 = $tablePokemonUser[$u]->getHp();
 
-            $previous_health_PKMN2 = $tablePokemonComputer[$c]->getHp();
+                    $previous_health_PKMN2 = $tablePokemonComputer[$c]->getHp();
 
 
-            
+                    
 
-            $tablePokemonUser[$u]->attacked($tablePokemonComputer[$c]->getDamage(), $tablePokemonComputer[$c]->getElement());
+                    $tablePokemonUser[$u]->attacked($tablePokemonComputer[$c]->getDamage(), $tablePokemonComputer[$c]->getElement());
 
-            $tablePokemonComputer[$c]->attacked($tablePokemonUser[$u]->getDamage(), $tablePokemonUser[$u]->getElement());
+                    $tablePokemonComputer[$c]->attacked($tablePokemonUser[$u]->getDamage(), $tablePokemonUser[$u]->getElement());
 
 
-            $new_health_PKMN1 = $tablePokemonUser[$u]->getHp();
+                    $new_health_PKMN1 = $tablePokemonUser[$u]->getHp();
 
-            $new_health_PKMN2 = $tablePokemonComputer[$c]->getHp();
+                    $new_health_PKMN2 = $tablePokemonComputer[$c]->getHp();
 
- 
-            
-            $_SESSION['pkmn1_health'] -= (float) $previous_health_PKMN1 - (float) $new_health_PKMN1;
+        
+                    
+                    $_SESSION['pkmn1_health'] -= (float) $previous_health_PKMN1 - (float) $new_health_PKMN1;
 
-            echo 'session :'.$_SESSION['pkmn1_health'];
+                    echo 'session :'.$_SESSION['pkmn1_health'];
 
-            $_SESSION['pkmn2_health'] -= (float) $previous_health_PKMN2 - (float) $new_health_PKMN2;
+                    $_SESSION['pkmn2_health'] -= (float) $previous_health_PKMN2 - (float) $new_health_PKMN2;
 
-            echo 'session :'.$_SESSION['pkmn2_health'];
+                    echo 'session :'.$_SESSION['pkmn2_health'];
+                }
+                
+            }
 
             
         }
