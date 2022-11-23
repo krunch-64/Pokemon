@@ -14,8 +14,8 @@
 
         <div class="fight_window__player_space2">
             <div class="fight_window__player_space2__infos">
-                <div class="fight_window__player_space2__infos__stats">
-                    <p class="txt-l name-pokemon">PIKACHU</p>
+                <div id="toAddPKMN2" class="fight_window__player_space2__infos__stats">
+                    
                 </div>
                 <div class="fight_window__player_space2__infos__ground">
                     <div id="pokemon2" class="pokemon-div pokemon2">
@@ -35,8 +35,9 @@
                         <img class="full-s" src="./assets/img/384.png" alt="">
                     </div>
                 </div>
-                <div class="fight_window__player_space1__infos__stats">
-                    <p class="txt-l name-pokemon">RAYQUAZA</p>
+                <div id="toAddPKMN1" class="fight_window__player_space1__infos__stats stats-hp-100">
+                    
+                    
                 </div>
             </div>
         </div>

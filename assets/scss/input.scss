@@ -268,18 +268,22 @@ html {
                 &__stats 
             
                 {
+                    position: relative;
                     width: 300px;
                     height: 120px;
-                    background-image: url(../img/stats.png);
-                    background-size: contain;
-                    position: relative;
-                    background-repeat: no-repeat;
+                    background: none;
                     
                     @media screen and (min-width: 801px) {
                         right: 50px;
                         top: 30px
                     }
-                    
+           
+
+
+             
+
+
+                
                 }
             }
         }
@@ -452,4 +456,21 @@ html {
 }
 
 
+.stats-hp {
+    @for $i from 0 through 20 {
+        &-#{$i * 5} {
+            //background-image: url('../img/stats-'+($i* 5)+'.png');
+            height: 100%;
+            width: 100%;
+            background-image: url("../img/stats-"+($i * 5)+".png");
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+    }
 
+}
+
+.name-pokemon {
+    position: relative;
+    top: 15px;
+}
