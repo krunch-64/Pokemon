@@ -2,6 +2,8 @@
     // chargement de la vue accueil
     include_once('./views/accueil.php');
 
+    // session_destroy();
+
     // // connexion du serveur web à la base MySQL
     // include_once ('../modeles/DAO.php');
 

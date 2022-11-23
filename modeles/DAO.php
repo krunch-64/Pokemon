@@ -197,7 +197,7 @@ class DAO
         $i = 0;
         
         // préparation de la requête de recherche
-        $txt_req = "Select pokemon_id, pokemon_name, pokemon_element, pokemon_element2, pokemon_hp, pokemon_attack, pokemon_defense, pokemon_damage_from, pokemon_damage_to, pokemon_img";
+        $txt_req = "Select pokemon_id, pokemon_name, pokemon_element, pokemon_hp, pokemon_attack, pokemon_defense, pokemon_damage_from, pokemon_img_front, pokemon_img_back";
         $txt_req .= " from pokemon";
         $txt_req .= " WHERE pokemon_id = 4 OR pokemon_id = 5 OR pokemon_id = 6";
 
@@ -220,16 +220,15 @@ class DAO
             $pokemon_id = $uneLigne->pokemon_id;
             $pokemon_name = $uneLigne->pokemon_name;
             $pokemon_element = $uneLigne->pokemon_element;
-            $pokemon_element2 = $uneLigne->pokemon_element2;
             $pokemon_hp = $uneLigne->pokemon_hp;
             $pokemon_damage = $uneLigne->pokemon_attack;
             $pokemon_defense = $uneLigne->pokemon_defense;
             $pokemon_damage_from = $uneLigne->pokemon_damage_from;
-            $pokemon_damage_to = $uneLigne->pokemon_damage_to;
-            $pokemon_img = $uneLigne->pokemon_img;
+            $pokemon_img_front = $uneLigne->pokemon_img_front;
+            $pokemon_img_back = $uneLigne->pokemon_img_back;
              
-            $unePokemon = new Pokemon($pokemon_id, $pokemon_name, $pokemon_element, $pokemon_element2, $pokemon_hp, $pokemon_damage, $pokemon_defense, json_decode($pokemon_damage_from), json_decode($pokemon_damage_to), $pokemon_img);
-            $lesPokemonsComputer[$i] = $unePokemon;
+            $unPokemon = new Pokemon($pokemon_id, $pokemon_name, $pokemon_element, $pokemon_hp, $pokemon_damage, $pokemon_defense, json_decode($pokemon_damage_from), $pokemon_img_front, $pokemon_img_back);
+            $lesPokemonsComputer[$i] = $unPokemon;
             $i++;
         }
         return $lesPokemonsComputer;

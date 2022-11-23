@@ -72,7 +72,7 @@ btnAttack1.addEventListener("click", function () {
     xhttp.onload = function() {
         document.querySelector('#test').innerHTML = this.responseText;
     };
-    xhttp.open("GET", "send_request_ajax.php?action=attack1", true);
+    xhttp.open("GET", "send_request_ajax.php?fight_action=attack1", true);
     xhttp.send();
 
     
@@ -96,7 +96,7 @@ btnPkmn1.addEventListener("click", function () {
     xhttp.onload = function() {
         document.querySelector('#test').innerHTML = this.responseText;
     };
-    xhttp.open("GET", "send_request_ajax.php?action=pkmn1", true);
+    xhttp.open("GET", "send_request_ajax.php?fight_action=pkmn1", true);
     xhttp.send();
 }); 
 
@@ -111,7 +111,7 @@ btnPkmn2.addEventListener("click", function () {
     xhttp.onload = function() {
         document.querySelector('#test').innerHTML = this.responseText;
     };
-    xhttp.open("GET", "send_request_ajax.php?action=pkmn2", true);
+    xhttp.open("GET", "send_request_ajax.php?fight_action=pkmn2", true);
     xhttp.send();
 }); 
 
@@ -134,14 +134,14 @@ setInterval(function () {
     xhttp.onload = function() {
         document.querySelector('#toAddPKMN1').innerHTML = this.responseText;
     };
-    xhttp.open("GET", "../stats-pkmn1.php", true);
+    xhttp.open("GET", "./stats-pkmn1.php", true);
     xhttp.send();
 
     var xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
         document.querySelector('#toAddPKMN2').innerHTML = this.responseText;
     };
-    xhttp.open("GET", "../stats-pkmn2.php", true);
+    xhttp.open("GET", "./stats-pkmn2.php", true);
     xhttp.send();
 
 
@@ -149,18 +149,26 @@ setInterval(function () {
     xhttp.onload = function() {
         document.querySelector('#pokemon1').innerHTML = this.responseText;
     };
-    xhttp.open("GET", "../pkmn1.php", true);
+    xhttp.open("GET", "./pkmn1.php", true);
     xhttp.send();
 
     var xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
         document.querySelector('#pokemon2').innerHTML = this.responseText;
     };
-    xhttp.open("GET", "../pkmn2.php", true);
+    xhttp.open("GET", "./pkmn2.php", true);
+    xhttp.send();
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+        document.querySelector('#test2').innerHTML = this.responseText;
+    };
+    xhttp.open("GET", "./refresh_ajax.php", true);
     xhttp.send();
 
 
+}, 200);
 
-}, 100);
+
 
 

@@ -20,7 +20,7 @@
     <div class="acueil_all">
         <form class="block" method="POST" action='./index.php?action=list&amp;offset=<?= offset(); ?>'>
             <a href="./index.php">
-                <img src="./assets/img/logo.png" alt="">
+                <img src="./assets/img/logo-2.png" class="" alt="">
             </a>
             <h4>Choisissez 3 pokémons :</h4>
             <div class="liste">

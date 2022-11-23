@@ -101,9 +101,9 @@ class Pokemon
 	 /**
      * degat subit par le pokemon
      * @param int $degat
-     * @return self
+     * @return int
      */
-    public function attacked($degat, $element): self
+    public function attacked($degat, $element): int
     {   
 		// si le damage_from correspond au type d'attaque de l'ennemie alors double degat
 		for($n=0; $n<count($this->getDouble_damage_from()); $n++)
@@ -138,7 +138,7 @@ class Pokemon
 			$this->setScore($this->getScore()+1);
         }
 
-        return $this;
+        return $this->getHp();
     }
 
 	// /**
