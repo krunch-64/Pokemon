@@ -6,6 +6,22 @@
 
     $dao = new DAO();
 
+    // $list_id = list_checkbox();
+
+    // function list_checkbox () 
+    // {
+    //     $table = array();
+
+    //     for ($i=0 ; $i < 24 ; $i++) {
+    //         if (isset($_POST[$i])) {
+    //             array_push($table, $i);
+    //         }
+            
+    //     }
+    //     return $table;
+    // }
+
+    // var_dump($list_id);
     // récupération du tableau des Pokemon
     $tablePokemonUser = $dao->getListePokemonUser();
     $tablePokemonComputer = $dao->getListePokemonComputer();

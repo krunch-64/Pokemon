@@ -18,7 +18,7 @@
 </head>
 <body id="accueil">
     <div class="acueil_all">
-        <form class="block" method="POST" action='./index.php?action=list'>
+        <form class="block" method="POST" action='./index.php?action=arena'>
             <a href="./index.php">
                 <img src="./assets/img/logo-2.png" class="" alt="">
             </a>

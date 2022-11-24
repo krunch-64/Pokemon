@@ -153,14 +153,16 @@ class DAO
         // préparation de la requête de recherche
         $txt_req = "Select pokemon_id, pokemon_name, pokemon_element, pokemon_hp, pokemon_attack, pokemon_defense, pokemon_damage_from, pokemon_img_front, pokemon_img_back";
         $txt_req .= " from pokemon";
-        $txt_req .= " WHERE pokemon_id = 1 OR pokemon_id = 2 OR pokemon_id = 3";
+        $txt_req .= " WHERE pokemon_id = 3 OR pokemon_id = 6 OR pokemon_id = 9";
 
         // faire juste quand le pokemon est utiliser /* where personne_id =id */
 
         $req = $this->cnx->prepare($txt_req);
         
         // liaison de la requête et de ses paramètres
-        // $req->bindValue("param1", $param1, PDO::PARAM_STR);
+        // $req->bindParam(":id1", $list_id[0]);
+        // $req->bindParam(":id2", $list_id[1]);
+        // $req->bindParam(":id3", $list_id[2]);
         
         // extraction des données
         $req->execute();

@@ -15,9 +15,6 @@
 
     $_SESSION['pkmn1_health'] = $tablePokemonUser[$_SESSION['pkmn1_increment']]->getHp();
     $_SESSION['pkmn2_health'] = $tablePokemonComputer[$_SESSION['pkmn2_increment']]->getHp();
-
-    
-
 ?>
 
 
